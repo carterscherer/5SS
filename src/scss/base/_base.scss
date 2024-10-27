@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Helvetica:wght@400;700&display=swap');
+@import url("https://use.typekit.net/iur8wnr.css");
+
+
+:root {
+
+    --retisGreen: #8BD450;
+    --retisBlue: #1C1A30;
+    --retisDark: #1E1E1E;
+    --retisClear: #1e1e1e7a;
+    --fade-black: #171717;
+    --pink-gradient: linear-gradient(65deg, #3e1a3e, #000000);
+
+    --linear-blue: linear-gradient(65deg, #0000FF, #000000);
+    --vertical-blue: linear-gradient(0deg, #0000FF, #000000, #000000);
+    --linear-black: linear-gradient(180deg, #11121a, #000000);
+    
+
+    --font-Archivo: "Archivo Black", sans-serif;
+    --helvetica: 'Helvetica', sans-serif;
+    --helvetica-like: "aglet-sans-variable",sans-serif;
+
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+.app-container {
+    font-family: "aglet-sans-variable",sans-serif;
+    
+    @media screen and (min-width:280px) and (max-width:1080px) {
+        padding: 0;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
