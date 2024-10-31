@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 import simpleLogo from '../assets/simpleLogo.png';
 
+import Login from "../components/Login"
+
 export default function Lockpage() {
   const [inputPin, setInputPin] = useState('');
   const [isUnlocked, setIsUnlocked] = useState(false);

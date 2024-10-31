@@ -1,0 +1,70 @@
+.menu {
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #000000;
+  
+    .logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .menu-title-container {
+        margin: 0.2rem 0.2rem 3rem 0rem;
+        border-radius: 1.3rem;
+        border: 0.3rem solid #eb2ce8;
+        background: radial-gradient(circle, #6312eeb0, #eb2ce8);
+        display: flex;
+        align-items: left;
+        justify-content: center;
+    }
+
+    .menu-title {
+
+        font-size: 2rem;
+        margin: 0.5rem 0rem 0rem 0rem;
+        color: #eb2ce8;
+        font-weight: 900;
+    }
+  
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+  
+    .menu-item {
+      background-color: #f9f9f91a;
+      padding: 15px;
+      border-radius: 8px;
+      border: 0.1rem solid #eb2ce8;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: left;
+  
+      .menu-item-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+  
+      .menu-item-title {
+        font-size: 1.2rem;
+        color: #eb2ce8;
+
+        margin: 10px 0;
+      }
+  
+      .menu-item-description {
+        font-size: 0.9rem;
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
+  
+      .menu-item-price {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #a4a4a4ac;
+      }
+    }
+  }
+  

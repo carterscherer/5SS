@@ -1,0 +1,58 @@
+// Define general styling for nav links and buttons in the header
+.header-nav {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem 2rem;
+    background-color: #eb2ce8;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    
+
+  }
+
+  .header-user-icon {
+    font-size: 1.9rem;
+    padding-right: 0.3rem;
+  }
+
+  .header-user {
+    font-weight: 900;
+    padding-right: 3rem;
+  }
+
+  // Styling for the links (Login/Register)
+  .header-link {
+    color: #000000;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  
+    &:hover {
+      color: #949494;
+    }
+  }
+  
+  // Styling for the button (Logout)
+  .header-button {
+    background-color: #e597e9;
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  
+    &:hover {
+      background-color: #5f72ff5a;
+      color: #ffffff;
+    }
+  }
+  
+  // Additional styling for logout-specific button
+  .logout-button {
+    font-weight: bold;
+  }
+  
