@@ -1,25 +1,26 @@
-// Define general styling for nav links and buttons in the header
+
 .header-nav {
 
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding: 1rem 2rem;
     background-color: #eb2ce8;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
     
 
   }
 
   .header-user-icon {
-    font-size: 1.9rem;
+    color: #7d1b93;
+    font-size: 1.5rem;
     padding-right: 0.3rem;
   }
 
   .header-user {
-    font-weight: 900;
-    padding-right: 3rem;
+    font-weight: 500;
+    padding-right: 2.6rem;
   }
 
   // Styling for the links (Login/Register)
@@ -27,7 +28,6 @@
     color: #000000;
     margin: 0 1rem;
     text-decoration: none;
-    font-weight: bold;
     transition: color 0.3s;
   
     &:hover {
@@ -46,7 +46,7 @@
     transition: background-color 0.3s, color 0.3s;
   
     &:hover {
-      background-color: #5f72ff5a;
+      background-color: #2e35c89d;
       color: #ffffff;
     }
   }

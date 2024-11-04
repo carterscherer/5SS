@@ -2,7 +2,36 @@
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
     padding: 20px;
-    background-color: #000000;
+    background: #000000;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 30vh;
+        background: repeating-linear-gradient(
+            43deg,
+            #1a1a1a,
+            #1a1a1a 10px,
+            #b524c039 10px,
+            #222222 20px
+        );
+        opacity: 0.2;
+        animation: sandAnimation 30s linear infinite;
+    }
+
+    @keyframes sandAnimation {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 100vh 100vw;
+        }
+    }
   
     .logo {
       max-width: 200px;
@@ -11,7 +40,7 @@
 
     .menu-title-container {
         margin: 0.2rem 0.2rem 3rem 0rem;
-        border-radius: 1.3rem;
+        border-radius: 0.5rem;
         border: 0.3rem solid #eb2ce8;
         background: radial-gradient(circle, #6312eeb0, #eb2ce8);
         display: flex;
@@ -21,8 +50,8 @@
 
     .menu-title {
 
-        font-size: 2rem;
-        margin: 0.5rem 0rem 0rem 0rem;
+        font-size: 3rem;
+        margin: 0.8rem 0rem 0rem 1.7rem;
         color: #eb2ce8;
         font-weight: 900;
     }
@@ -66,5 +95,5 @@
         color: #a4a4a4ac;
       }
     }
-  }
-  
+}
+

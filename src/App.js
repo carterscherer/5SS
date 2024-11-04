@@ -1,9 +1,8 @@
 import Login from "./components/Login";
 import Register from "./components/Register";
-
 import Header from "./components/Header";
 import Home from "./components/Home";
-
+import Lockpage from "./components/Lockpage";
 import { AuthProvider } from "./context/authContext";
 import { useRoutes } from "react-router-dom";
 
@@ -24,6 +23,10 @@ function App() {
     {
       path: "/home",
       element: <Home />,
+    },
+    {
+      path: "/38bW9E04dBO8fWKE0m",
+      element: <Lockpage />,
     },
   ];
   let routesElement = useRoutes(routesArray);

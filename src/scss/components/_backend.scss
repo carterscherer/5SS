@@ -1,0 +1,44 @@
+.backend {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    .menu-item {
+        display: flex;
+        flex-direction: column; // Adjust for edit view
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .edit-form {
+        display: flex;
+        flex-direction: column;
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    }
+
+    .menu-item-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+}

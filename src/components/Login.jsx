@@ -8,6 +8,7 @@ import simpleLogo from '../assets/simpleLogo.png';
 
 
 const Login = () => {
+
     const { userLoggedIn } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -34,7 +35,7 @@ const Login = () => {
             {userLoggedIn && (<Navigate to="/home" replace={true} />)}
             <main className="login-container">
                 <div className="login-box">
-                <div className="simpleLogo"><img src={simpleLogo} alt="Logo" /></div>
+                    <div className="simpleLogo"><img src={simpleLogo} alt="Logo" /></div>
                     <header className="login-header">
                         <h3>Welcome Back</h3>
                     </header>
@@ -80,7 +81,7 @@ const Login = () => {
                     </div>
                     <button
                         className="google-signin"
-                        disabled={isSigningIn}
+                        // disabled={isSigningIn}
                         onClick={onGoogleSignIn}
                         onTouchStart={onGoogleSignIn}
                     >
