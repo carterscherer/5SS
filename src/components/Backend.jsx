@@ -1,77 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../scss/components/_backend.scss";
-import initialMenuItems from '../utils/menuData'; // import hardcoded menu items array
-import menuItems from '../utils/menuData';
+import initialMenuItems from '../utils/menuData';
+import { db } from "../firebase/firebase";
+import { getDocs, collection, updateDoc, doc } from 'firebase/firestore';
+
 
 const Backend = () => {
-    // Initialize state with imported menu items
-    const [menuItems, setMenuItems] = useState(initialMenuItems);
+   const [memberList, setMemberList] = useState([]);
+   const membersCollectionRef = collection(db, "members");
 
-    // Function to handle editing changes
-    const handleInputChange = (e, id, field) => {
-        const updatedItems = menuItems.map((item) => 
-            item.id === id ? { ...item, [field]: e.target.value } : item
-        );
-        setMenuItems(updatedItems);
-    };
+   useEffect(() => {
+       const getMemberList = async () => {
+           try {
+               const data = await getDocs(membersCollectionRef);
+               const members = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+               setMemberList(members);
+           } catch (err) {
+               console.error(err);
+           }
+       };
+       getMemberList();
+   }, []);
 
-    // Function to save changes (optional: can add save to DB or localStorage here)
-    const handleSave = () => {
-        console.log("Saved items:", menuItems);
-        // Optionally, save to localStorage or a database here
-    };
+   // Function to toggle approval status
+   const toggleApproval = async (memberId, currentStatus) => {
+       const memberDoc = doc(db, "members", memberId);
+       await updateDoc(memberDoc, { isApproved: !currentStatus });
 
-    // Function to delete an item
-    const handleDelete = (id) => {
-        const filteredItems = menuItems.filter((item) => item.id !== id);
-        setMenuItems(filteredItems);
-    };
+       // Update local state
+       setMemberList((prevMembers) =>
+           prevMembers.map((member) =>
+               member.id === memberId ? { ...member, isApproved: !currentStatus } : member
+           )
+       );
+   };
 
-    // Function to add a new item
-    const handleAddNewItem = () => {
-        const newItem = {
-            id: menuItems.length + 1,
-            image: "", // Set a default image if needed
-            title: "New Item",
-            description: "Enter a description here",
-            price: "$0.00"
-        };
-        setMenuItems([...menuItems, newItem]);
-    };
-
-    return (
-        <div className="backend">
-            <h2>Menu Management</h2>
-            <div className="menu-items">
-                {menuItems.map((item) => (
-                    <div key={item.id} className="menu-item-edit">
-                        <input
-                            type="text"
-                            value={item.title}
-                            onChange={(e) => handleInputChange(e, item.id, "title")}
-                        />
-                        <input
-                            type="text"
-                            value={item.description}
-                            onChange={(e) => handleInputChange(e, item.id, "description")}
-                        />
-                        <input
-                            type="text"
-                            value={item.price}
-                            onChange={(e) => handleInputChange(e, item.id, "price")}
-                        />
-                        <button onClick={() => handleDelete(item.id)}>Delete</button>
-                    </div>
-                ))}
-                <div className="add-new-button">
-                    <button onClick={handleAddNewItem}>Add New Item</button>
-                </div>
-                <div className="save-button">
-                    <button onClick={handleSave}>Save Changes</button>
-                </div>
-            </div>
-        </div>
-    );
+   return (
+       <div className="backend">
+           <h2>Member Approvals</h2>
+           {memberList.map((member) => (
+               <div key={member.id} className="member-item">
+                   <h3 style={{ color: member.isApproved ? "green" : "red" }}>
+                       {member.firstName || "Unnamed"} - {member.email}
+                   </h3>
+                   <input
+                       type="checkbox"
+                       checked={member.isApproved}
+                       onChange={() => toggleApproval(member.id, member.isApproved)}
+                   />
+                   <label>Approve</label>
+               </div>
+           ))}
+       </div>
+   );
 };
+
 
 export default Backend;

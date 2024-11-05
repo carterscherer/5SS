@@ -1,4 +1,4 @@
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,8 +9,21 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 
+import { doc, setDoc } from "firebase/firestore";
+
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
-  return createUserWithEmailAndPassword(auth, email, password);
+  const result = await createUserWithEmailAndPassword(auth, email, password);
+  const user = result.user;
+
+  // Add user to Firestore 'members' collection
+  await setDoc(doc(db, "members", user.uid), {
+    email: user.email,
+    firstName: "", // Optional: could collect from a form input
+    isApproved: false, // Default to not approved
+    createdAt: new Date(), // Timestamp for when the user was created
+  });
+
+  return user;
 };
 
 export const doSignInWithEmailAndPassword = (email, password) => {
@@ -22,9 +35,22 @@ export const doSignInWithGoogle = async () => {
   const result = await signInWithPopup(auth, provider);
   const user = result.user;
 
+  // Add user to Firestore 'members' collection if they don't already exist
+  const userDoc = doc(db, "members", user.uid);
+  await setDoc(
+    userDoc,
+    {
+      email: user.email,
+      firstName: user.displayName || "", // Using Google displayName if available
+      isApproved: false,
+      createdAt: new Date(),
+    },
+    { merge: true } // This will only create if the document doesn't exist
+  );
 
-  // add user to firestore
+  return user;
 };
+
 
 export const doSignOut = () => {
   return auth.signOut();
