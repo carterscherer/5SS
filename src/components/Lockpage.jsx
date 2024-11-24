@@ -4,7 +4,6 @@ import simpleLogo from '../assets/simpleLogo.png';
 import Backend from './Backend';
 import "../scss/components/_lockpage.scss";
 
-
 export default function Lockpage() {
   const [inputPin, setInputPin] = useState('');
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -19,19 +18,26 @@ export default function Lockpage() {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleUnlock();
+    }
+  };
+
   return (
     <div className="lockpage">
       {!isUnlocked ? (
         <div className="pin-container">
-            <div className="simpleLogo">
-                <img src={simpleLogo} alt="Logo" />
-            </div>
+          <div className="simpleLogo">
+            <img src={simpleLogo} alt="Logo" />
+          </div>
           <p className="prompt">Enter Code:</p>
           <input
             type="tel"
             maxLength="4"
             value={inputPin}
             onChange={(e) => setInputPin(e.target.value.replace(/\D/g, ''))} // Allow only digits
+            onKeyDown={handleKeyDown} // Add keydown handler
           />
           <button onClick={handleUnlock}>Unlock</button>
         </div>

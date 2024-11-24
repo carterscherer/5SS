@@ -1,0 +1,25 @@
+.newAdd {
+    padding: 1rem;
+    color: #ffffff;
+
+    .output {
+        padding: 1rem;
+        color: #ffffff;
+    }
+
+    .input-button {
+        padding: 0.5rem 1rem 0.5rem 0.5rem;
+        margin: 1rem;
+        color: #000000;
+        background-color: #eb2ce8;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #fc68fa;
+        }
+    }
+    
+}

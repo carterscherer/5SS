@@ -1,5 +1,5 @@
 .backend {
-    max-width: 600px; // Limit the width for desktop view
+    max-width: 100vw;
     margin: 0 auto;
     padding: 20px;
     background-color: #000000;
@@ -8,67 +8,108 @@
     text-align: center;
     font-family: Arial, sans-serif;
     border: 0.3rem solid #eb2ce8;
-
-
-    h2 {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    overflow: hidden;
+  
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 3.5rem;
+  
+      button {
+        padding: 0.3rem 4.44rem;
+        background-color: transparent;
+        border: 0.2rem solid #eb2ce8;
+        color: #eb2ce8;
+        border-radius: 6px;
+        margin: 0 4rem;
+        cursor: pointer;
+        font-size: 1rem;
+  
+        &.active {
+          background-color: #eb2ce8;
+          color: #000;
+        }
+  
+        &:hover {
+          background-color: #eb2ce8;
+          color: #000;
+        }
+      }
+    }
+  
+    .tab-content {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1rem 1rem;
+      box-sizing: border-box;
+  
+      h2 {
         font-size: 2rem;
         color: #eb2ce8;
-        margin-bottom: 1.5rem;
-    }
-
-    .member-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 15px;
-        background-color: #ffffff05;
-        border-radius: 6px;
-        margin-bottom: 15px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border: 0.3rem solid #eb2ce8;
-
-
-        h3 {
-            font-size: 1.1rem;
-            color: #333;
-            margin: 0;
-            flex: 1;
-            text-align: left;
-        }
-
-        input[type="checkbox"] {
-            margin: 1rem;
-        }
-
-        label {
-            font-size: 1rem;
-            color: #666;
-        }
-    }
-
-    // Responsive adjustments
-    @media (max-width: 600px) {
-        padding: 15px;
-        margin: 1rem;
-
-        h2 {
-            font-size: 1.5rem;
-        }
-
-        .member-item {
-            padding: 8px 10px;
+        margin-bottom: 3rem;
+      }
+  
+      .menu-list {
+        list-style-type: none;
+        padding: 0;
+  
+        .menu-item {
+          padding: 1rem 1.5rem;
+          background-color: #ffffff05;
+          border-radius: 6px;
+          margin-bottom: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          border: 0.2rem solid #eb2ce8;
+          color: #eb2ce8;
+          text-align: left;
+  
+          .menu-item-content {
+            display: flex;
             flex-direction: column;
-            align-items: flex-start;
-
-            h3 {
-                font-size: 1rem;
-                margin-bottom: 5px;
-                text-align: left;
+  
+            input, textarea {
+              margin-bottom: 10px;
+              padding: 0.5rem;
+              border-radius: 4px;
+              border: 1px solid #eb2ce8;
+              background-color: transparent;
+              color: #fff;
+              font-size: 1rem;
             }
-
-            label {
-                font-size: 0.9rem;
+  
+            button {
+              margin-top: 10px;
+              padding: 0.5rem 2rem;
+              border: 0.2rem solid #eb2ce8;
+              background-color: #eb2ce8;
+              color: #fff;
+              border-radius: 6px;
+              cursor: pointer;
+  
+              &:hover {
+                background-color: #d92ec2;
+              }
             }
+          }
         }
+      }
+  
+      button {
+        padding: 0.5rem 1.5rem;
+        background-color: #eb2ce8;
+        color: #fff;
+        border-radius: 6px;
+        border: 0.2rem solid #eb2ce8;
+        cursor: pointer;
+        margin-top: 1rem;
+  
+        &:hover {
+          background-color: #d92ec2;
+        }
+      }
     }
-}
+  }
+  

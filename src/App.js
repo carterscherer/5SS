@@ -1,8 +1,9 @@
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Header from "./components/Header";
 import Home from "./components/Home";
+import BackendLogin from "./components/BackendLogin";
 import Lockpage from "./components/Lockpage";
+
 import { AuthProvider } from "./context/authContext";
 import { useRoutes } from "react-router-dom";
 
@@ -26,6 +27,10 @@ function App() {
     },
     {
       path: "/38bW9E04dBO8fWKE0m",
+      element: <BackendLogin />,
+    },
+    {
+      path: "/24E2rb33O8E0m",
       element: <Lockpage />,
     },
   ];
