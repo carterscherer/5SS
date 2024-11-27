@@ -2,6 +2,7 @@
   {
     "maxAgeSeconds": 3600,
     "method": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    "origin": ["*"]
+    "origin": ["*"],
+    "headers": ["Content-Type", "Authorization"]
   }
 ]

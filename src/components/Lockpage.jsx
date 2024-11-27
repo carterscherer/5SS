@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo.png';
 import simpleLogo from '../assets/simpleLogo.png';
 import Backend from './Backend';
+import Backendheader from '../components/Backendheader'
 import "../scss/components/_lockpage.scss";
 
 export default function Lockpage() {
@@ -42,7 +42,10 @@ export default function Lockpage() {
           <button onClick={handleUnlock}>Unlock</button>
         </div>
       ) : (
+        <div>
+        <Backendheader />
         <Backend />
+        </div>
       )}
     </div>
   );
