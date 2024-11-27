@@ -27,12 +27,8 @@ function App() {
     },
     {
       path: "/38bW9E04dBO8fWKE0m",
-      element: <BackendLogin />,
-    },
-    {
-      path: "/24E2rb33O8E0m",
       element: <Lockpage />,
-    },
+    }
   ];
   let routesElement = useRoutes(routesArray);
   return (
