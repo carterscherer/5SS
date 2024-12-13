@@ -3,6 +3,9 @@ import { auth, db } from "../firebase/firebase";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import logo from '../assets/logo.png';
 import Simplelogo from '../assets/simpleLogo.png';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Import React Icons
+import { IoMdArrowDropright, IoMdArrowDropleft } from "react-icons/io";
+
 import "../scss/components/_menu.scss";
 
 const Menu = () => {
@@ -37,14 +40,18 @@ const Menu = () => {
                     id: doc.id,
                     ...doc.data()
                 }));
-                setMenuItems(fetchedMenuItems); // Set the fetched data to state
+
+                // Sort items by orderIndex before setting them in state
+                const sortedMenuItems = fetchedMenuItems.sort((a, b) => a.orderIndex - b.orderIndex);
+
+                setMenuItems(sortedMenuItems); // Set the sorted data to state
             } catch (err) {
                 console.error("Error fetching menu items:", err);
             }
         };
 
         fetchApprovalStatus();
-        fetchMenuItems(); // Fetch menu items when the component loads
+        fetchMenuItems(); 
     }, []);
 
     if (loading) {
@@ -63,10 +70,10 @@ const Menu = () => {
                         {menuItems.length > 0 ? (
                             menuItems.map((item) => (
                                 <div key={item.id} className="menu-item">
-                                    <img src={item.image || "https://via.placeholder.com/150"} alt={item.title} className="menu-item-image" />
+                                    <ImageCarousel images={item.images} title={item.title} />
                                     <h3 className="menu-item-title">{item.title}</h3>
-                                    <p className="menu-item-description">{item.description}</p>
-                                    <p className="menu-item-price">${item.price ? item.price.toFixed(2) : '0.00'}</p>
+                                    <p className="menu-item-description">{item.strains}</p>
+                                    <p className="menu-item-description">{item.pricing}</p>
                                 </div>
                             ))
                         ) : (
@@ -85,6 +92,31 @@ const Menu = () => {
                     </div>
                 </div>
             )}
+        </div>
+    );
+};
+
+// Carousel component for images
+const ImageCarousel = ({ images, title }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const handlePrev = () => {
+        setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+    };
+
+    const handleNext = () => {
+        setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    };
+
+    return (
+        <div className="carousel-container">
+            <button onClick={handlePrev} className="carousel-button left">
+                <IoMdArrowDropleft />
+            </button>
+            <img src={images[currentIndex]} alt={title} className="menu-item-image" />
+            <button onClick={handleNext} className="carousel-button right">
+                <IoMdArrowDropright />
+            </button>
         </div>
     );
 };

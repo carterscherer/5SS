@@ -61,6 +61,39 @@
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 20px;
     }
+
+    .carousel-container {
+      position: relative;
+      display: inline-block;
+  }
+  
+  .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.0);
+      color: white;
+      border: none;
+
+      cursor: pointer;
+      z-index: 1;
+  }
+  
+  .left {
+      left: -2rem;
+      font-size: 3rem;
+  }
+  
+  .right {
+      right: -2rem;
+      font-size: 3rem;
+  }
+  
+  .menu-item-image {
+      width: 100%;
+      height: auto;
+  }
+  
   
     .menu-item {
       background-color: #f9f9f91a;
