@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../scss/components/_add.scss";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 import { LiaHandMiddleFingerSolid } from "react-icons/lia";
+import { FaTrashAlt } from "react-icons/fa";
 import { db } from "../firebase/firebase";
-import { getDocs, collection, updateDoc, doc } from "firebase/firestore";
+import { getDocs, collection, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import Add from "../components/Add";
 
 const Backend = () => {
@@ -37,6 +38,17 @@ const Backend = () => {
     );
   };
 
+  const deleteMember = async (memberId) => {
+    const memberDoc = doc(db, "members", memberId);
+    await deleteDoc(memberDoc);
+
+    // Update local state
+    setMemberList((prevMembers) => prevMembers.filter((member) => member.id !== memberId));
+  };
+
+  // Sort members: Approved members first, unapproved members last
+  const sortedMemberList = [...memberList].sort((a, b) => a.isApproved === b.isApproved ? 0 : a.isApproved ? -1 : 1);
+
   return (
     <div className="backend">
       <div className="tabs">
@@ -56,12 +68,14 @@ const Backend = () => {
 
       {activeTab === "approvals" && (
         <div className="tab-content">
-          <h2>MEMBER APPROVALS</h2>
-          {memberList.map((member) => (
-            <div key={member.id} className="member-item">
-              <h3 style={{ color: member.isApproved ? "green" : "red" }}>
-                {member.firstName || "Unnamed"} - {member.email}
-              </h3>
+        <h2>MEMBER APPROVALS</h2>
+        {sortedMemberList.map((member) => (
+          <div key={member.id} className="member-item">
+            
+            <h3 style={{ color: member.isApproved ? "green" : "red" }}>
+              {member.firstName || "Unnamed"} - {member.email}
+            </h3>
+            <div className="actions">
               <div
                 className="approval-checkbox"
                 onClick={() => toggleApproval(member.id, member.isApproved)}
@@ -73,9 +87,17 @@ const Backend = () => {
                   <LiaHandMiddleFingerSolid size={24} color="gray" />
                 )}
               </div>
+              <div
+                className="delete-button"
+                onClick={() => deleteMember(member.id)}
+                style={{ cursor: "pointer", marginTop: "-1rem" }}
+              >
+                <FaTrashAlt className="trash-icon" size={14} color="red" />
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>      
       )}
 
       {activeTab === "menu" && (

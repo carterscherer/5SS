@@ -69,3 +69,17 @@ export const doSendEmailVerification = () => {
     url: `${window.location.origin}/home`,
   });
 };
+
+export const handleForgotPassword = async (email, setErrorMessage) => {
+  if (!email) {
+    setErrorMessage("Please enter your email address.");
+    return;
+  }
+
+  try {
+    await doPasswordReset(email);
+    setErrorMessage("Password reset email sent. Please check your inbox.");
+  } catch (error) {
+    setErrorMessage(error.message || "Failed to send password reset email.");
+  }
+};

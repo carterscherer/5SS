@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "../scss/components/_add.scss";
-
 import { FaSquarePlus } from "react-icons/fa6";
-import { MdDelete } from "react-icons/md"; // Importing delete icon
-
+import { MdDelete } from "react-icons/md";
 import { db } from "../firebase/firebase";
 import { getDocs, collection, doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
+import { IoMdArrowDropright } from "react-icons/io";
+import { IoMdArrowDropleft } from "react-icons/io";
+
 
 export default function Add() {
   const [menuList, setMenu] = useState([]);
-  const [editingItem, setEditingItem] = useState(null); // Tracks the item being edited
-  const [updatedFields, setUpdatedFields] = useState({}); // Holds updated values
+  const [editingItem, setEditingItem] = useState(null);
+  const [updatedFields, setUpdatedFields] = useState({});
 
   const menuCollectionRef = collection(db, "menu");
 
@@ -19,7 +20,9 @@ export default function Add() {
       try {
         const data = await getDocs(menuCollectionRef);
         const menu = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-        setMenu(menu);
+        // Sort by orderIndex
+        const sortedMenu = menu.sort((a, b) => a.orderIndex - b.orderIndex);
+        setMenu(sortedMenu);
       } catch (err) {
         console.error(err);
       }
@@ -28,9 +31,9 @@ export default function Add() {
   }, []);
 
   const handleEdit = (id) => {
-    setEditingItem(id); // Sets the currently edited item
+    setEditingItem(id);
     const currentItem = menuList.find((menu) => menu.id === id);
-    setUpdatedFields({ ...currentItem }); // Prepopulate inputs with current values
+    setUpdatedFields({ ...currentItem });
   };
 
   const handleChange = (e) => {
@@ -40,20 +43,15 @@ export default function Add() {
 
   const handleUpdate = async (id) => {
     try {
-      const itemDoc = doc(db, "menu", id); // Reference to the specific document
-      await updateDoc(itemDoc, {
-        title: updatedFields.title,
-        price: parseFloat(updatedFields.price), // Ensure price is a number
-        description: updatedFields.description,
-        image: updatedFields.image, // Save the updated image link
-      });
-      setEditingItem(null); // Exit editing mode
-
-      // Update the local state for better UX
+      const itemDoc = doc(db, "menu", id);
+      await updateDoc(itemDoc, updatedFields);
+      setEditingItem(null);
       setMenu((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, ...updatedFields } : item
-        )
+        prev
+          .map((item) =>
+            item.id === id ? { ...item, ...updatedFields } : item
+          )
+          .sort((a, b) => a.orderIndex - b.orderIndex) // Re-sort after update
       );
     } catch (err) {
       console.error("Error updating document:", err);
@@ -62,11 +60,8 @@ export default function Add() {
 
   const handleDelete = async (id) => {
     try {
-      // Delete item from Firestore
       const itemDoc = doc(db, "menu", id);
       await deleteDoc(itemDoc);
-
-      // Update local state to reflect deletion
       setMenu((prev) => prev.filter((item) => item.id !== id));
     } catch (err) {
       console.error("Error deleting document:", err);
@@ -77,15 +72,16 @@ export default function Add() {
     try {
       const newMenuItem = {
         title: "",
-        price: 0,
-        description: "",
-        image: "",
+        pricing: "",
+        strains: "",
+        images: [],
+        orderIndex: menuList.length + 1, // Default new item to the end
       };
       const newDocRef = await addDoc(menuCollectionRef, newMenuItem);
       const newMenuItemWithId = { ...newMenuItem, id: newDocRef.id };
-      setMenu((prev) => [...prev, newMenuItemWithId]); // Add new item to the list
-      setEditingItem(newDocRef.id); // Automatically open it for editing
-      setUpdatedFields(newMenuItemWithId); // Prepopulate the fields with new values
+      setMenu((prev) => [...prev, newMenuItemWithId].sort((a, b) => a.orderIndex - b.orderIndex));
+      setEditingItem(newDocRef.id);
+      setUpdatedFields(newMenuItemWithId);
     } catch (err) {
       console.error("Error adding new menu item:", err);
     }
@@ -96,13 +92,16 @@ export default function Add() {
       <div className="menu-grid">
         {menuList.map((menu) => (
           <div key={menu.id} className="menu-item">
-            <img
-              src={menu.image || "https://via.placeholder.com/150"}
-              alt={menu.title || "No title"}
-              className="menu-image"
-            />
+            <ImageCarousel images={menu.images || []} />
             {editingItem === menu.id ? (
               <div className="edit-fields">
+                <input
+                  type="number"
+                  name="orderIndex"
+                  value={updatedFields.orderIndex || ""}
+                  onChange={handleChange}
+                  placeholder="Edit Order Index"
+                />
                 <input
                   type="text"
                   name="title"
@@ -110,38 +109,55 @@ export default function Add() {
                   onChange={handleChange}
                   placeholder="Edit Title"
                 />
-                <input
-                  type="text"
-                  name="price"
-                  value={updatedFields.price || ""}
-                  onChange={handleChange}
-                  placeholder="Edit Price"
-                />
                 <textarea
-                  name="description"
-                  value={updatedFields.description || ""}
+                  name="pricing"
+                  value={updatedFields.pricing || ""}
                   onChange={handleChange}
-                  placeholder="Edit Description"
+                  placeholder="Add Pricing"
+                ></textarea>
+                <textarea
+                  name="strains"
+                  value={updatedFields.strains || ""}
+                  onChange={handleChange}
+                  placeholder="Add Strains"
                 ></textarea>
                 <input
                   type="text"
-                  name="image"
-                  value={updatedFields.image || ""}
-                  onChange={handleChange}
-                  placeholder="Add Image Link"
+                  name="images" // Update images field
+                  value={updatedFields.images?.join(", ") || ""}
+                  onChange={(e) =>
+                    setUpdatedFields((prev) => ({
+                      ...prev,
+                      images: e.target.value.split(",").map((url) => url.trim()),
+                    }))
+                  }
+                  placeholder="Add Image Links (comma separated)"
                 />
                 <button onClick={() => handleUpdate(menu.id)}>Save</button>
                 <button onClick={() => setEditingItem(null)}>Cancel</button>
               </div>
             ) : (
               <div>
-                <h3>{menu.title || "Untitled"}</h3>
-                <p>{menu.description || "No description available"}</p>
-                <p>Price: ${menu.price ? Number(menu.price).toFixed(2) : "0.00"}</p>
-                <button onClick={() => handleEdit(menu.id)}>EDIT THIS ITEM</button>
-                <button onClick={() => handleDelete(menu.id)} className="delete-button">
-                  <MdDelete /> Delete
-                </button>
+                <div className="title-container">
+                  <h3 className="menu-title">{menu.title || "Untitled"}</h3>
+                  <span className="order-index">{menu.orderIndex || 0}</span>
+                </div>
+                <p>Pricing: {menu.pricing || "No Prices Available"}</p>
+                <p>Strains: {menu.strains || "No Strains Available"}</p>
+                <div className="buttons-container">
+                  <button
+                    onClick={() => handleEdit(menu.id)}
+                    className="edit-button"
+                  >
+                    EDIT THIS ITEM
+                  </button>
+                  <button
+                    onClick={() => handleDelete(menu.id)}
+                    className="delete-button"
+                  >
+                    <MdDelete /> Delete
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -151,6 +167,46 @@ export default function Add() {
           <p>Add New Item</p>
         </div>
       </div>
+    </div>
+  );
+}
+
+function ImageCarousel({ images }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? images.length - 1 : prev - 1
+    );
+  };
+
+  if (images.length === 0) {
+    return (
+      <img
+        src="https://via.placeholder.com/150"
+        alt="Placeholder"
+        className="menu-image"
+      />
+    );
+  }
+
+  return (
+    <div className="image-carousel">
+      <button onClick={prevImage} className="carousel-button">
+        <IoMdArrowDropleft />
+      </button>
+      <img
+        src={images[currentIndex]}
+        alt={`Slide ${currentIndex}`}
+        className="menu-image"
+      />
+      <button onClick={nextImage} className="carousel-button">
+        <IoMdArrowDropright />
+      </button>
     </div>
   );
 }
