@@ -1,6 +1,7 @@
 .add {
     padding: 1rem;
     color: #ffffff;
+
   
     .menu-grid {
       display: grid;
@@ -25,7 +26,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    
+      overflow-y: hidden;
+      
       .menu-image {
         max-width: 100%;
         height: auto;
