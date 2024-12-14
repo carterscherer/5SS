@@ -121,7 +121,7 @@ export default function Add() {
                   onChange={handleChange}
                   placeholder="Add Strains"
                 ></textarea>
-                <input
+                <textarea
                   type="text"
                   name="images" // Update images field
                   value={updatedFields.images?.join(", ") || ""}
