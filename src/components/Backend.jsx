@@ -6,6 +6,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { db } from "../firebase/firebase";
 import { getDocs, collection, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import Add from "../components/Add";
+import BulletinEditor from "./BulletinEditor";
 
 const Backend = () => {
   const [activeTab, setActiveTab] = useState("approvals"); // Default tab
@@ -64,46 +65,59 @@ const Backend = () => {
         >
           MENU EDITOR
         </button>
+        <button
+          className={activeTab === "bulletin" ? "active" : ""}
+          onClick={() => setActiveTab("bulletin")}
+        >
+          BULLETIN EDITOR
+        </button>
       </div>
 
       {activeTab === "approvals" && (
         <div className="tab-content">
-        <h2>MEMBER APPROVALS</h2>
-        {sortedMemberList.map((member) => (
-          <div key={member.id} className="member-item">
-            
-            <h3 style={{ color: member.isApproved ? "green" : "red" }}>
-              {member.firstName || "Unnamed"} - {member.email}
-            </h3>
-            <div className="actions">
-              <div
-                className="approval-checkbox"
-                onClick={() => toggleApproval(member.id, member.isApproved)}
-                style={{ cursor: "pointer" }}
-              >
-                {member.isApproved ? (
-                  <IoMdCheckmarkCircle size={24} color="green" />
-                ) : (
-                  <LiaHandMiddleFingerSolid size={24} color="gray" />
-                )}
-              </div>
-              <div
-                className="delete-button"
-                onClick={() => deleteMember(member.id)}
-                style={{ cursor: "pointer", marginTop: "-1rem" }}
-              >
-                <FaTrashAlt className="trash-icon" size={14} color="red" />
+          <h2>MEMBER APPROVALS</h2>
+          {sortedMemberList.map((member) => (
+            <div key={member.id} className="member-item">
+
+              <h3 style={{ color: member.isApproved ? "green" : "red" }}>
+                {member.firstName || "Unnamed"} - {member.email}
+              </h3>
+              <div className="actions">
+                <div
+                  className="approval-checkbox"
+                  onClick={() => toggleApproval(member.id, member.isApproved)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {member.isApproved ? (
+                    <IoMdCheckmarkCircle size={24} color="green" />
+                  ) : (
+                    <LiaHandMiddleFingerSolid size={24} color="gray" />
+                  )}
+                </div>
+                <div
+                  className="delete-button"
+                  onClick={() => deleteMember(member.id)}
+                  style={{ cursor: "pointer", marginTop: "-1rem" }}
+                >
+                  <FaTrashAlt className="trash-icon" size={14} color="red" />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>      
+          ))}
+        </div>
       )}
 
       {activeTab === "menu" && (
         <div className="tab-content">
           <h2>MENU EDITOR</h2>
           <Add />
+        </div>
+      )}
+
+      {activeTab === "bulletin" && (
+        <div className="tab-content">
+          <h2>BULLETIN EDITOR</h2>
+          <BulletinEditor />
         </div>
       )}
     </div>

@@ -40,8 +40,8 @@
       }
     }
   }
-  
-  
+
+
 
   .tab-content {
     flex-grow: 1;
@@ -51,14 +51,17 @@
 
     .member-item {
       display: flex;
-      align-items: center; /* Align items horizontally */
-      justify-content: space-between; /* Push the checkbox to the right */
+      align-items: center;
+      /* Align items horizontally */
+      justify-content: space-between;
+      /* Push the checkbox to the right */
       margin-bottom: 1rem;
       padding: 0.9rem;
 
       h3 {
         color: #fff;
-        flex: 1; /* Take available space */
+        flex: 1;
+        /* Take available space */
       }
 
       .approval-checkbox {
@@ -81,33 +84,176 @@
 
   /* Media Queries for Responsiveness */
   @media (max-width: 768px) {
-    padding: 20px 10px 10px 10px; /* Add more top padding for mobile */
-    height: auto; /* Let content grow on small screens */
+    padding: 20px 10px 10px 10px;
+    /* Add more top padding for mobile */
+    height: auto;
+
+    /* Let content grow on small screens */
     .tabs {
-      flex-direction: column; /* Stack the tabs vertically */
+      flex-direction: column;
+
+      /* Stack the tabs vertically */
       button {
-        padding: 0.8rem 2rem; /* Adjust padding for mobile */
-        margin: 0.5rem 0; /* Smaller margin between buttons */
+        padding: 0.8rem 2rem;
+        /* Adjust padding for mobile */
+        margin: 0.5rem 0;
+        /* Smaller margin between buttons */
       }
     }
 
     .tab-content {
-      padding: 1rem; /* Adjust padding for mobile */
+      padding: 1rem;
+      /* Adjust padding for mobile */
     }
 
     h2 {
-      font-size: 1.8rem; /* Smaller heading for mobile */
-      margin-bottom: 1.5rem; /* Less space for smaller screens */
+      font-size: 1.8rem;
+      /* Smaller heading for mobile */
+      margin-bottom: 1.5rem;
+      /* Less space for smaller screens */
     }
 
     .member-item {
-      flex-direction: column; /* Stack member items vertically */
-      padding: 1rem; /* Adjust padding for mobile */
-      align-items: flex-start; /* Align items to the left */
+      flex-direction: column;
+      /* Stack member items vertically */
+      padding: 1rem;
+      /* Adjust padding for mobile */
+      align-items: flex-start;
+      /* Align items to the left */
     }
 
     .approval-checkbox {
-      padding-left: 1rem; /* Adjust the padding on mobile */
+      padding-left: 1rem;
+      /* Adjust the padding on mobile */
     }
+  }
+
+  .bulletin-editor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    margin: 0 auto;
+
+    .bulletin-item {
+      background: #2c2c2c;
+      border-radius: 8px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      max-width: 200px;
+      justify-self: center;
+      width: 100%;
+
+      .bulletin-image-container {
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 8px;
+        border: 2px solid #eb2ce8;
+
+        img {
+          width: 150px !important;
+          height: 150px !important;
+          object-fit: contain !important;
+        }
+      }
+
+      .edit-controls {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        input {
+          padding: 8px;
+          border: 1px solid #eb2ce8;
+          border-radius: 4px;
+          background: #2c2c2c;
+          color: white;
+          width: 100%;
+        }
+
+        .button-group {
+          display: flex;
+          gap: 8px;
+          justify-content: center;
+        }
+      }
+
+      button {
+        padding: 8px 16px;
+        background-color: #eb2ce8;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #fc68fa;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .bulletin-editor {
+      grid-template-columns: repeat(4, 1fr);
+
+      .bulletin-item {
+        max-width: 180px;
+
+        .bulletin-image-container {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    .bulletin-editor {
+      grid-template-columns: repeat(3, 1fr);
+
+      .bulletin-item {
+        max-width: 180px;
+
+        .bulletin-image-container {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .bulletin-editor {
+      grid-template-columns: repeat(2, 1fr);
+
+      .bulletin-item {
+        max-width: 180px;
+
+        .bulletin-image-container {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    }
+  }
+
+  // Force image scaling
+  img.bulletin-image {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
   }
 }
