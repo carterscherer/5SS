@@ -51,8 +51,15 @@ const Menu = () => {
         };
 
         fetchApprovalStatus();
-        fetchMenuItems(); 
+        fetchMenuItems();
     }, []);
+
+    const formatBulletPoints = (text) => {
+        if (!text) return null;
+        return text.split('\n').filter(item => item.trim()).map((item, index) => (
+            <li key={index}>{item.trim()}</li>
+        ));
+    };
 
     if (loading) {
         return <p>Loading...</p>;
@@ -72,8 +79,12 @@ const Menu = () => {
                                 <div key={item.id} className="menu-item">
                                     <ImageCarousel images={item.images} title={item.title} />
                                     <h3 className="menu-item-title">{item.title}</h3>
-                                    <p className="menu-item-description">{item.strains}</p>
-                                    <p className="menu-item-description">{item.pricing}</p>
+                                    <ul className="menu-item-list">
+                                        {formatBulletPoints(item.strains)}
+                                    </ul>
+                                    <ul className="menu-item-list">
+                                        {formatBulletPoints(item.pricing)}
+                                    </ul>
                                 </div>
                             ))
                         ) : (

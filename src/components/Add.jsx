@@ -87,6 +87,15 @@ export default function Add() {
     }
   };
 
+  const formatBulletPoints = (text) => {
+    if (!text) return null;
+    return text.split('\n')
+      .filter(item => item.trim())
+      .map((item, index) => (
+        <li key={index}>{item.trim()}</li>
+      ));
+  };
+
   return (
     <div className="add">
       <div className="menu-grid">
@@ -113,13 +122,13 @@ export default function Add() {
                   name="pricing"
                   value={updatedFields.pricing || ""}
                   onChange={handleChange}
-                  placeholder="Add Pricing"
+                  placeholder="Add Pricing (one item per line)"
                 ></textarea>
                 <textarea
                   name="strains"
                   value={updatedFields.strains || ""}
                   onChange={handleChange}
-                  placeholder="Add Strains"
+                  placeholder="Add Strains (one strain per line)"
                 ></textarea>
                 <textarea
                   type="text"
@@ -142,8 +151,16 @@ export default function Add() {
                   <h3 className="menu-title">{menu.title || "Untitled"}</h3>
                   <span className="order-index">{menu.orderIndex || 0}</span>
                 </div>
-                <p>Pricing: {menu.pricing || "No Prices Available"}</p>
-                <p>Strains: {menu.strains || "No Strains Available"}</p>
+                <div className="content-section">
+                  <h4>Strains:</h4>
+                  <ul className="menu-item-list">
+                    {formatBulletPoints(menu.strains)}
+                  </ul>
+                  <h4>Pricing:</h4>
+                  <ul className="menu-item-list">
+                    {formatBulletPoints(menu.pricing)}
+                  </ul>
+                </div>
                 <div className="buttons-container">
                   <button
                     onClick={() => handleEdit(menu.id)}
