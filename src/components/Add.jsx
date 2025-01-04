@@ -6,6 +6,7 @@ import { db } from "../firebase/firebase";
 import { getDocs, collection, doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { IoMdArrowDropright } from "react-icons/io";
 import { IoMdArrowDropleft } from "react-icons/io";
+import { PiSealWarningFill, PiSealCheckFill, PiSealPercentFill } from "react-icons/pi";
 
 
 export default function Add() {
@@ -96,12 +97,19 @@ export default function Add() {
       ));
   };
 
+  const statusOptions = [
+    { value: '', label: 'No Status' },
+    { value: 'low_inventory', label: 'Low Inventory', icon: <PiSealWarningFill /> },
+    { value: 'hot', label: 'Hot', icon: <PiSealCheckFill /> },
+    { value: 'price_change', label: 'Price Change', icon: <PiSealPercentFill /> }
+  ];
+
   return (
     <div className="add">
       <div className="menu-grid">
         {menuList.map((menu) => (
           <div key={menu.id} className="menu-item">
-            <ImageCarousel images={menu.images || []} />
+            <ImageCarousel images={menu.images || []} status={menu.status} />
             {editingItem === menu.id ? (
               <div className="edit-fields">
                 <input
@@ -142,6 +150,18 @@ export default function Add() {
                   }
                   placeholder="Add Image Links (comma separated)"
                 />
+                <select
+                  name="status"
+                  value={updatedFields.status || ''}
+                  onChange={handleChange}
+                  className="status-select"
+                >
+                  {statusOptions.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
                 <button onClick={() => handleUpdate(menu.id)}>Save</button>
                 <button onClick={() => setEditingItem(null)}>Cancel</button>
               </div>
@@ -188,7 +208,7 @@ export default function Add() {
   );
 }
 
-function ImageCarousel({ images }) {
+function ImageCarousel({ images, status }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextImage = () => {
@@ -199,6 +219,19 @@ function ImageCarousel({ images }) {
     setCurrentIndex((prev) =>
       prev === 0 ? images.length - 1 : prev - 1
     );
+  };
+
+  const getStatusIcon = () => {
+    switch (status) {
+      case 'low_inventory':
+        return <PiSealWarningFill className="status-icon" data-status="Low Inventory" />;
+      case 'hot':
+        return <PiSealCheckFill className="status-icon" data-status="Hot Item" />;
+      case 'price_change':
+        return <PiSealPercentFill className="status-icon" data-status="Price Change" />;
+      default:
+        return null;
+    }
   };
 
   if (images.length === 0) {
@@ -216,11 +249,14 @@ function ImageCarousel({ images }) {
       <button onClick={prevImage} className="carousel-button">
         <IoMdArrowDropleft />
       </button>
-      <img
-        src={images[currentIndex]}
-        alt={`Slide ${currentIndex}`}
-        className="menu-image"
-      />
+      <div className="image-wrapper">
+        <img
+          src={images[currentIndex]}
+          alt={`Slide ${currentIndex}`}
+          className="menu-image"
+        />
+        {getStatusIcon()}
+      </div>
       <button onClick={nextImage} className="carousel-button">
         <IoMdArrowDropright />
       </button>

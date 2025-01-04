@@ -1,94 +1,81 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/authContext'
 import { doSignOut } from '../firebase/auth'
 import "../scss/components/_header.scss";
 import { BsFillPersonBadgeFill } from "react-icons/bs";
-import { BiSolidFoodMenu } from "react-icons/bi";
-import { IoMdClose } from "react-icons/io";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from '../firebase/firebase';
+import { ImMenu } from "react-icons/im";
 
 const Header = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [flyers, setFlyers] = useState([]);
-    const { currentUser } = useAuth()
-    const navigate = useNavigate()
-    const { userLoggedIn } = useAuth()
+    const { currentUser, userLoggedIn, isApproved } = useAuth();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchFlyers = async () => {
-            try {
-                const flyersCollectionRef = collection(db, "flyer");
-                const data = await getDocs(flyersCollectionRef);
-                const flyerData = data.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                console.log("Fetched flyer data:", flyerData);
-                setFlyers(flyerData);
-            } catch (err) {
-                console.error("Error fetching flyers:", err);
-            }
-        };
+    if (!userLoggedIn) return null;
 
-        if (showModal) {
-            fetchFlyers();
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    // Get first name from email or displayName
+    const getFirstName = () => {
+        if (currentUser?.displayName) {
+            return currentUser.displayName.split(' ')[0];
         }
-    }, [showModal]);
+        if (currentUser?.email) {
+            return currentUser.email.split('@')[0];
+        }
+        return 'User';
+    };
 
     return (
-        <>
-            <nav className="header-nav">
-                <button className="menu-icon-button" onClick={() => setShowModal(true)}>
-                    <BiSolidFoodMenu />
+        <nav className="header-nav">
+            {/* Mobile Menu Icon */}
+            {isApproved && (
+                <button className="mobile-menu-button" onClick={toggleMenu}>
+                    <ImMenu />
                 </button>
-                <div className="header-user-icon"><BsFillPersonBadgeFill /></div>
-                <div className="header-user">{currentUser.displayName ? currentUser.displayName : currentUser.email}</div>
-                {
-                    userLoggedIn
-                        ? (
-                            <button className="header-button logout-button" onClick={() => {
-                                doSignOut().then(() => { navigate('/login') })
-                            }}>
-                                Logout
+            )}
 
-                            </button>
-                        ) : (
-                            <>
-                                <Link className="header-link" to={'/login'}>Login</Link>
-                                <Link className="header-link" to={'/register'}>Register New Account</Link>
-                            </>
-                        )
-                }
-            </nav>
+            {/* Desktop Navigation */}
+            {isApproved && (
+                <div className="desktop-nav">
+                    <Link to="/home" className="nav-link">Home</Link>
+                    <Link to="/bulletin" className="nav-link">Bulletin</Link>
+                    <Link to="/contact" className="nav-link">Contact</Link>
+                </div>
+            )}
 
-            {showModal && (
-                <div className="modal-overlay">
-                    <div className="modal-content">
-                        <button className="modal-close" onClick={() => setShowModal(false)}>
-                            <IoMdClose />
-                        </button>
-                        <div className="flyers-container">
-                            {flyers.map((flyer) => {
-                                console.log("Rendering flyer:", flyer);
-                                return (
-                                    <img
-                                        key={flyer.id}
-                                        src={flyer.image}
-                                        alt="Flyer"
-                                        className="flyer-image"
-                                        style={{ maxWidth: '100%', height: 'auto' }}
-                                        onError={(e) => console.error("Image failed to load:", e)}
-                                    />
-                                );
-                            })}
-                        </div>
+            {/* Desktop User Info */}
+            <div className="header-user-section">
+                <div className="header-user-info">
+                    <BsFillPersonBadgeFill className="header-user-icon" />
+                    <span className="header-user">{getFirstName()}</span>
+                </div>
+                <button
+                    className="header-button logout-button"
+                    onClick={() => doSignOut().then(() => navigate('/login'))}
+                >
+                    Logout
+                </button>
+            </div>
+
+            {/* Mobile Menu Dropdown */}
+            {isApproved && isMenuOpen && (
+                <div className="mobile-menu-dropdown">
+                    <div className="mobile-user-info">
+                        <BsFillPersonBadgeFill className="header-user-icon" />
+                        <span className="header-user">{getFirstName()}</span>
+                    </div>
+                    <div className="mobile-nav-links">
+                        <Link to="/home" className="nav-link" onClick={toggleMenu}>Home</Link>
+                        <Link to="/bulletin" className="nav-link" onClick={toggleMenu}>Bulletin</Link>
+                        <Link to="/contact" className="nav-link" onClick={toggleMenu}>Contact</Link>
                     </div>
                 </div>
             )}
-        </>
-    )
-}
+        </nav>
+    );
+};
 
-export default Header
+export default Header;

@@ -80,7 +80,7 @@ const Backend = () => {
             <div key={member.id} className="member-item">
 
               <h3 style={{ color: member.isApproved ? "green" : "red" }}>
-                {member.firstName || "Unnamed"} - {member.email}
+                {member.firstName || member.email.split('@')[0]} - {member.email}
               </h3>
               <div className="actions">
                 <div

@@ -1,40 +1,131 @@
 .header-nav {
-
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 1rem 2rem;
   background-color: #eb2ce8;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
 
+// Mobile menu button
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
 
+  &:hover {
+    color: #7d1b93;
+  }
+}
+
+// Desktop navigation
+.desktop-nav {
+  display: flex;
+  gap: 2rem;
+
+  .nav-link {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #7d1b93;
+    }
+  }
+}
+
+// User section
+.header-user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .header-user-icon {
   color: #7d1b93;
   font-size: 1.5rem;
-  padding-right: 0.3rem;
 }
 
 .header-user {
   font-weight: 500;
-  padding-right: 2.6rem;
+  color: #000000;
 }
 
-// Styling for the links (Login/Register)
-.header-link {
-  color: #000000;
-  margin: 0 1rem;
-  text-decoration: none;
-  transition: color 0.3s;
+// Mobile menu dropdown
+.mobile-menu-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #eb2ce8;
+  padding: 0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
 
-  &:hover {
-    color: #949494;
+.mobile-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mobile-nav-links {
+  padding-top: 0.5rem;
+
+  .nav-link {
+    display: block;
+    padding: 1rem;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #d41ad1;
+      color: #ffffff;
+    }
   }
 }
 
-// Styling for the button (Logout)
+// Media queries for mobile
+@media (max-width: 768px) {
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .header-user-section {
+    .header-user-info {
+      display: none;
+    }
+  }
+
+  .mobile-menu-dropdown {
+    display: block;
+  }
+}
+
+// Button styles
 .header-button {
   background-color: #e597e9;
   color: #000000;
@@ -50,100 +141,6 @@
   }
 }
 
-// Additional styling for logout-specific button
 .logout-button {
   font-weight: bold;
-}
-
-.menu-icon-button {
-  background: none;
-  border: none;
-  color: #7d1b93;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  margin-right: auto; // This pushes other items to the right
-
-  &:hover {
-    color: #eb2ce8;
-  }
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: #00000062;
-  padding: 2rem;
-  border-radius: 8px;
-  border: 0.1rem solid #eb2ce8;
-  position: relative;
-  width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: #eb2ce8;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  z-index: 1001;
-
-  &:hover {
-    color: #ffffff;
-  }
-}
-
-.flyers-container {
-  overflow-y: visible;
-  max-height: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-right: 1rem;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #1a1a1a;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #eb2ce8;
-    border-radius: 4px;
-  }
-}
-
-.flyer-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  object-fit: contain;
-  background-color: transparent;
-  max-height: 80vh;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 }
