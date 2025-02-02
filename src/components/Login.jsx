@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle, doPasswordReset } from "../firebase/auth";
 import { useAuth } from "../context/authContext";
-import { FcGoogle } from "react-icons/fc";
 import "../scss/components/_login.scss";
 import Logo from '../assets/logo.png';
 
@@ -27,17 +26,10 @@ const Login = () => {
                 } else if (error.code === 'auth/user-not-found') {
                     setErrorMessage('No account found with this email.');
                 } else {
-                    setErrorMessage('An unexpected error occurred. Please try again.');
+                    setErrorMessage('Wrong email or password. Please try again.');
                 }
                 setIsSigningIn(false);
             }
-        }
-    };
-
-    const onGoogleSignIn = async () => {
-        if (!isSigningIn) {
-            setIsSigningIn(true);
-            doSignInWithGoogle().catch(() => setIsSigningIn(false));
         }
     };
 
@@ -58,14 +50,14 @@ const Login = () => {
                 setErrorMessage('An error occurred. Please try again.');
             }
         }
-    };    
+    };
 
     return (
         <div className="login-page">
             {userLoggedIn && (<Navigate to="/home" replace={true} />)}
             <main className="login-container">
                 <div className="login-box">
-                    <div className="simpleLogo"><img src={ Logo } alt="Logo" /></div>
+                    <div className="simpleLogo"><img src={Logo} alt="Logo" /></div>
                     <header className="login-header"></header>
                     <form className="login-form" onSubmit={onSubmit}>
                         <div className="form-group">
@@ -106,21 +98,8 @@ const Login = () => {
                         Forgot Password?
                     </button>
                     <p className="register-link">
-                        Don’t have an account? <Link to="/register">Sign up</Link>
+                        Don't have an account? <Link to="/register">Sign up</Link>
                     </p>
-                    <div className="divider">
-                        <span className="divider-line"></span>
-                        <span className="divider-text">OR</span>
-                        <span className="divider-line"></span>
-                    </div>
-                    <button
-                        className="google-signin"
-                        onClick={onGoogleSignIn}
-                        onTouchStart={onGoogleSignIn}
-                    >
-                        <FcGoogle size={20} />
-                        {isSigningIn ? 'Signing In...' : 'Continue with Google'}
-                    </button>
                 </div>
             </main>
         </div>

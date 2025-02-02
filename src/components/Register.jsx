@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Navigate, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/authContext'
+import { getAuth, updateProfile } from 'firebase/auth'
 import { doCreateUserWithEmailAndPassword } from '../firebase/auth'
 import { db } from '../firebase/firebase' // Import Firestore instance
 import { doc, setDoc } from 'firebase/firestore' // Firestore methods
@@ -21,6 +22,12 @@ const Register = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
+        const userFirstName = firstName.trim()
+        if (!userFirstName) {
+            setErrorMessage("First name is required")
+            return
+        }
+
         if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match")
             return
@@ -31,16 +38,7 @@ const Register = () => {
         if (!isRegistering) {
             setIsRegistering(true)
             try {
-                const userCredential = await doCreateUserWithEmailAndPassword(email, password)
-                const userId = userCredential.user.uid
-
-                // Save additional data to Firestore
-                await setDoc(doc(db, "users", userId), {
-                    firstName: firstName,
-                    userId: userId,
-                    isApproved: false
-                })
-
+                await doCreateUserWithEmailAndPassword(email, password, userFirstName)
                 navigate('/home')
             } catch (error) {
                 setErrorMessage(error.message)
@@ -53,14 +51,15 @@ const Register = () => {
     return (
         <div className="register-page">
             {userLoggedIn && (<Navigate to={'/home'} replace={true} />)}
-            
+
             <main className="register-container">
                 <div className="register-box">
                     <header className="register-header">
                         <h3>Create a New Account</h3>
                     </header>
-    
+
                     <form className="register-form" onSubmit={onSubmit}>
+
                         {/* First Name Field */}
                         <div className="form-group">
                             <label htmlFor="firstName">First Name</label>
@@ -73,7 +72,7 @@ const Register = () => {
                                 className="form-input"
                             />
                         </div>
-    
+
                         {/* Email Field */}
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
@@ -87,7 +86,7 @@ const Register = () => {
                                 className="form-input"
                             />
                         </div>
-    
+
                         {/* Password Field */}
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
@@ -102,7 +101,7 @@ const Register = () => {
                                 className="form-input"
                             />
                         </div>
-    
+
                         {/* Confirm Password Field */}
                         <div className="form-group">
                             <label htmlFor="confirmPassword">Confirm Password</label>
@@ -117,15 +116,15 @@ const Register = () => {
                                 className="form-input"
                             />
                         </div>
-    
+
                         {errorMessage && (
                             <span className="error-message">{errorMessage}</span>
                         )}
-    
+
                         <button className="submit-button" type="submit" disabled={isRegistering}>
                             {isRegistering ? 'Signing Up...' : 'Sign Up'}
                         </button>
-    
+
                         <div className="login-link">
                             Already have an account?{' '}
                             <Link to={'/login'}>Continue</Link>

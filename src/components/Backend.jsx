@@ -7,10 +7,12 @@ import { db } from "../firebase/firebase";
 import { getDocs, collection, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import Add from "../components/Add";
 import BulletinEditor from "./BulletinEditor";
+import { getAuth, getUserByEmail } from 'firebase/auth'
 
 const Backend = () => {
   const [activeTab, setActiveTab] = useState("approvals"); // Default tab
   const [memberList, setMemberList] = useState([]);
+  const auth = getAuth();
 
   const membersCollectionRef = collection(db, "members");
 
@@ -18,7 +20,15 @@ const Backend = () => {
     const getMemberList = async () => {
       try {
         const data = await getDocs(membersCollectionRef);
-        const members = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        const members = data.docs.map((doc) => {
+          const memberData = doc.data();
+          return {
+            ...memberData,
+            id: doc.id,
+            displayName: memberData.firstName || memberData.email.split('@')[0]  // Use firstName or email prefix
+          };
+        });
+        console.log('Members:', members);
         setMemberList(members);
       } catch (err) {
         console.error(err);
@@ -78,9 +88,9 @@ const Backend = () => {
           <h2>MEMBER APPROVALS</h2>
           {sortedMemberList.map((member) => (
             <div key={member.id} className="member-item">
-
               <h3 style={{ color: member.isApproved ? "green" : "red" }}>
-                {member.firstName || member.email.split('@')[0]} - {member.email}
+                <span className="member-name">{member.displayName}</span>
+                <span className="member-email"> - {member.email}</span>
               </h3>
               <div className="actions">
                 <div

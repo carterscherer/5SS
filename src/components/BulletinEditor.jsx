@@ -102,7 +102,9 @@ const BulletinEditor = () => {
     return (
         <div className="bulletin-editor">
             <div className="content-editor">
-                {['intro', 'disclaimer', 'updates'].map((field) => (
+                {/* Commenting out INTRO and DISCLAIMER sections */}
+                {/*['intro', 'disclaimer', 'updates'].map((field) => (*/}
+                {['updates'].map((field) => (
                     <div key={field} className="content-item">
                         <h3>{field.toUpperCase()}</h3>
                         {editingField === field ? (
@@ -130,11 +132,11 @@ const BulletinEditor = () => {
                 ))}
             </div>
             <div className="flyers-editor">
-                {flyers.map(flyer => (
-                    <div key={flyer.id} className="bulletin-item">
+                {flyers.length > 0 && (
+                    <div className="bulletin-item">
                         <div className="bulletin-image-container">
                             <img
-                                src={processImageUrl(flyer.image)}
+                                src={processImageUrl(flyers[0].image)}
                                 alt="Flyer"
                                 className="bulletin-image"
                                 width="150"
@@ -143,7 +145,7 @@ const BulletinEditor = () => {
                             />
                         </div>
 
-                        {editingId === flyer.id ? (
+                        {editingId === flyers[0].id ? (
                             <div className="edit-controls">
                                 <input
                                     type="text"
@@ -152,7 +154,7 @@ const BulletinEditor = () => {
                                     placeholder="Enter new image URL"
                                 />
                                 <div className="button-group">
-                                    <button onClick={() => handleUpdate(flyer.id)}>Save</button>
+                                    <button onClick={() => handleUpdate(flyers[0].id)}>Save</button>
                                     <button onClick={() => {
                                         setEditingId(null);
                                         setNewImageUrl("");
@@ -161,12 +163,12 @@ const BulletinEditor = () => {
                             </div>
                         ) : (
                             <button onClick={() => {
-                                setEditingId(flyer.id);
-                                setNewImageUrl(flyer.image);
+                                setEditingId(flyers[0].id);
+                                setNewImageUrl(flyers[0].image);
                             }}>Edit Image URL</button>
                         )}
                     </div>
-                ))}
+                )}
             </div>
         </div>
     );

@@ -7,20 +7,27 @@ import {
   updatePassword,
   signInWithPopup,
   GoogleAuthProvider,
+  getAuth,
+  updateProfile,
 } from "firebase/auth";
 
 import { doc, setDoc } from "firebase/firestore";
 
-export const doCreateUserWithEmailAndPassword = async (email, password) => {
+export const doCreateUserWithEmailAndPassword = async (email, password, firstName) => {
   const result = await createUserWithEmailAndPassword(auth, email, password);
   const user = result.user;
+
+  // Update auth profile with display name
+  await updateProfile(user, {
+    displayName: firstName
+  });
 
   // Add user to Firestore 'members' collection
   await setDoc(doc(db, "members", user.uid), {
     email: user.email,
-    firstName: "", // Optional: could collect from a form input
-    isApproved: false, // Default to not approved
-    createdAt: new Date(), // Timestamp for when the user was created
+    firstName: firstName,
+    isApproved: false,
+    createdAt: new Date(),
   });
 
   return user;
@@ -50,7 +57,6 @@ export const doSignInWithGoogle = async () => {
 
   return user;
 };
-
 
 export const doSignOut = () => {
   return auth.signOut();

@@ -17,15 +17,9 @@ const Header = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    // Get first name from email or displayName
-    const getFirstName = () => {
-        if (currentUser?.displayName) {
-            return currentUser.displayName.split(' ')[0];
-        }
-        if (currentUser?.email) {
-            return currentUser.email.split('@')[0];
-        }
-        return 'User';
+    // Get display name from auth
+    const getDisplayName = () => {
+        return currentUser?.displayName || '';
     };
 
     return (
@@ -40,8 +34,8 @@ const Header = () => {
             {/* Desktop Navigation */}
             {isApproved && (
                 <div className="desktop-nav">
-                    <Link to="/bulletin" className="nav-link">Home</Link>
                     <Link to="/home" className="nav-link">Menu</Link>
+                    <Link to="/bulletin" className="nav-link">Bulletin</Link>
                     <Link to="/contact" className="nav-link">Contact</Link>
                 </div>
             )}
@@ -50,7 +44,7 @@ const Header = () => {
             <div className="header-user-section">
                 <div className="header-user-info">
                     <BsFillPersonBadgeFill className="header-user-icon" />
-                    <span className="header-user">{getFirstName()}</span>
+                    <span className="header-user">{getDisplayName()}</span>
                 </div>
                 <button
                     className="header-button logout-button"
@@ -65,11 +59,11 @@ const Header = () => {
                 <div className="mobile-menu-dropdown">
                     <div className="mobile-user-info">
                         <BsFillPersonBadgeFill className="header-user-icon" />
-                        <span className="header-user">{getFirstName()}</span>
+                        <span className="header-user">{getDisplayName()}</span>
                     </div>
                     <div className="mobile-nav-links">
-                        <Link to="/bulletin" className="nav-link" onClick={toggleMenu}>Home</Link>
                         <Link to="/home" className="nav-link" onClick={toggleMenu}>Menu</Link>
+                        <Link to="/bulletin" className="nav-link" onClick={toggleMenu}>Bulletin</Link>
                         <Link to="/contact" className="nav-link" onClick={toggleMenu}>Contact</Link>
                     </div>
                 </div>

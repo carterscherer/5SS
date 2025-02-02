@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../firebase/firebase';
 import "../scss/components/_bulletin.scss";
-import logo from '../assets/simpleLogo.png';
+import logo from '../assets/logo.png';
 import { IoMdArrowDropright, IoMdArrowDropleft } from "react-icons/io";
 
 const Bulletin = () => {
@@ -73,23 +73,22 @@ const Bulletin = () => {
     return (
         <div className="bulletin">
             <div className="bulletin-title-container">
-                <h1>HOME</h1>
                 <img src={logo} alt="Logo" className="logo" />
+                <h1 className="bulletin-title">BULLETIN</h1>
             </div>
 
-            <section className="intro-section">
-                <p>{bulletinContent.intro}</p>
+            <section className="updates-section">
+                <h3>Latest Updates</h3>
+                <p>{bulletinContent.updates}</p>
             </section>
 
             <section className="flyers-section">
-                <h2>Bulletin Flyers</h2>
+                <h2>REFERRAL REWARDS</h2>
                 <div className="flyers-container">
                     <div className="swiper-container">
-                        <ImageCarousel images={flyers.map(flyer => flyer.image)} />
-                    </div>
-                    <div className="updates-notice">
-                        <h3>Latest Updates</h3>
-                        <p>{bulletinContent.updates}</p>
+                        {flyers.length > 0 && (
+                            <img src={flyers[0].image} alt="Flyer" className="flyer-image" />
+                        )}
                     </div>
                 </div>
             </section>
