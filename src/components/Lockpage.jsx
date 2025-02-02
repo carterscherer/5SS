@@ -8,7 +8,7 @@ export default function Lockpage() {
   const [inputPin, setInputPin] = useState('');
   const [isUnlocked, setIsUnlocked] = useState(false);
 
-  const validPins = ["4495", "0000", "5678", "9012"]; // Example 4-digit PINs
+  const validPins = ["fivestar111"]; // Changed to text passwords
 
   const handleUnlock = () => {
     if (validPins.includes(inputPin)) {
@@ -31,20 +31,19 @@ export default function Lockpage() {
           <div className="simpleLogo">
             <img src={simpleLogo} alt="Logo" />
           </div>
-          <p className="prompt">Enter Code:</p>
+          <p className="prompt">Enter Password:</p>
           <input
-            type="tel"
-            maxLength="4"
+            type="password"
             value={inputPin}
-            onChange={(e) => setInputPin(e.target.value.replace(/\D/g, ''))} // Allow only digits
-            onKeyDown={handleKeyDown} // Add keydown handler
+            onChange={(e) => setInputPin(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
           <button onClick={handleUnlock}>Unlock</button>
         </div>
       ) : (
         <div>
-        <Backendheader />
-        <Backend />
+          <Backendheader />
+          <Backend />
         </div>
       )}
     </div>

@@ -87,9 +87,10 @@
         .flyers-container {
             display: flex;
             justify-content: center;
-            max-width: 1200px;
+            max-width:fit-content;
             margin: 0 auto;
-            padding: 2rem;
+            margin-bottom: 4rem;
+            padding: 0rem;
             background-color: #f9f9f91a;
             border: 0.1rem solid #eb2ce8;
             border-radius: 8px;

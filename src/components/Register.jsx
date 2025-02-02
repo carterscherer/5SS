@@ -62,7 +62,7 @@ const Register = () => {
 
                         {/* First Name Field */}
                         <div className="form-group">
-                            <label htmlFor="firstName">First Name</label>
+                            <label htmlFor="firstName">Name</label>
                             <input
                                 id="firstName"
                                 type="text"

@@ -93,9 +93,9 @@ const Bulletin = () => {
                 </div>
             </section>
 
-            <section className="disclaimer">
+            {/* <section className="disclaimer">
                 <p>{bulletinContent.disclaimer}</p>
-            </section>
+            </section> */}
         </div>
     );
 };
