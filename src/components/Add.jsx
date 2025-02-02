@@ -172,13 +172,13 @@ export default function Add() {
                   <span className="order-index">{menu.orderIndex || 0}</span>
                 </div>
                 <div className="content-section">
-                  <h4>Strains:</h4>
-                  <ul className="menu-item-list">
-                    {formatBulletPoints(menu.strains)}
-                  </ul>
                   <h4>Pricing:</h4>
                   <ul className="menu-item-list">
                     {formatBulletPoints(menu.pricing)}
+                  </ul>
+                  <h4>Strains:</h4>
+                  <ul className="menu-item-list">
+                    {formatBulletPoints(menu.strains)}
                   </ul>
                 </div>
                 <div className="buttons-container">

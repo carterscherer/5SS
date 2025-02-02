@@ -63,10 +63,10 @@ const Menu = () => {
                             <ImageCarousel images={item.images} title={item.title} status={item.status} />
                             <h3 className="menu-item-title">{item.title}</h3>
                             <ul className="menu-item-list">
-                                {formatBulletPoints(item.strains)}
+                                {formatBulletPoints(item.pricing)}
                             </ul>
                             <ul className="menu-item-list">
-                                {formatBulletPoints(item.pricing)}
+                                {formatBulletPoints(item.strains)}
                             </ul>
                         </div>
                     ))
