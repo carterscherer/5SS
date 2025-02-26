@@ -12,6 +12,7 @@ const Bulletin = () => {
         intro: '',
         updates: ''
     });
+    const [testimonials, setTestimonials] = useState([]);
 
     useEffect(() => {
         const fetchContent = async () => {
@@ -36,6 +37,15 @@ const Bulletin = () => {
                         updates: bulletinDoc.updates || ''
                     });
                 }
+
+                // Fetch testimonials
+                const testimonialsCollectionRef = collection(db, "testimonials");
+                const testimonialsData = await getDocs(testimonialsCollectionRef);
+                const testimonialData = testimonialsData.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setTestimonials(testimonialData);
             } catch (err) {
                 console.error("Error fetching content:", err);
             }
@@ -90,6 +100,27 @@ const Bulletin = () => {
                             <img src={flyers[0].image} alt="Flyer" className="flyer-image" />
                         )}
                     </div>
+                </div>
+            </section>
+
+            <section className="testimonials-section">
+                <h2>USER TESTIMONIALS</h2>
+                <div className="testimonials-container">
+                    {testimonials.length > 0 ? (
+                        testimonials.map(testimonial => (
+                            <img
+                                key={testimonial.id}
+                                src={testimonial.image}
+                                alt="User testimonial"
+                                className="testimonial-image"
+                            />
+                        ))
+                    ) : (
+                        <div>
+                        <p className="coming-soon">Signal FiveStar to show up on the bulletin</p>
+                        <p></p>
+                        </div>
+                    )}
                 </div>
             </section>
 

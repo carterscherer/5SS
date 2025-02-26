@@ -424,3 +424,24 @@ html {
     }
   }
 }
+
+.unavailable-item {
+  color: red;
+  text-decoration: line-through;
+}
+
+.pricing-list {
+  text-align: left;
+}
+
+.strains-list {
+  text-align: center;
+}
+
+.pricing-label {
+  text-align: left;
+}
+
+.strains-label {
+  text-align: center;
+}

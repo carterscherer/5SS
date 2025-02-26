@@ -9,6 +9,10 @@ import {
   GoogleAuthProvider,
   getAuth,
   updateProfile,
+  updateEmail,
+  deleteUser,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
 
 import { doc, setDoc } from "firebase/firestore";
@@ -88,4 +92,23 @@ export const handleForgotPassword = async (email, setErrorMessage) => {
   } catch (error) {
     setErrorMessage(error.message || "Failed to send password reset email.");
   }
+};
+
+export const doUpdateEmail = async (newEmail) => {
+  const user = auth.currentUser;
+  await updateEmail(user, newEmail);
+  return user;
+};
+
+export const doReauthenticate = async (password) => {
+  const user = auth.currentUser;
+  const credential = EmailAuthProvider.credential(user.email, password);
+  return reauthenticateWithCredential(user, credential);
+};
+
+export const doDeleteAccount = async (password) => {
+  const user = auth.currentUser;
+  await doReauthenticate(password);
+  await deleteUser(user);
+  return user;
 };

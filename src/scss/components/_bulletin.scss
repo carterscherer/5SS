@@ -87,12 +87,12 @@
         .flyers-container {
             display: flex;
             justify-content: center;
-            max-width:fit-content;
+            max-width: fit-content;
             margin: 0 auto;
             margin-bottom: 4rem;
             padding: 0rem;
-            background-color: #f9f9f91a;
-            border: 0.1rem solid #eb2ce8;
+            background-color: #f9f9f900;
+            border: 0rem solid #eb2ce8;
             border-radius: 8px;
         }
 
@@ -225,6 +225,45 @@
                 right: -2rem;
                 font-size: 4.5rem;
             }
+        }
+    }
+}
+
+.testimonials-section {
+    text-align: center;
+    margin: 3rem auto;
+    max-width: 1200px;
+    padding: 0 1rem;
+
+    h2 {
+        color: #eb2ce8;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .testimonials-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+
+        .testimonial-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .coming-soon {
+            color: #ffffff;
+            font-size: 1.2rem;
+            padding: 2rem;
+            background-color: #f9f9f91a;
+            border: 1px solid #eb2ce8;
+            border-radius: 8px;
         }
     }
 }

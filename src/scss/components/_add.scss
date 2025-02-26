@@ -124,6 +124,7 @@
     flex-direction: column;
     height: fit-content;
     min-height: 200px;
+    overflow: hidden;
 
     &:hover {
       transform: translateY(-5px);
@@ -149,6 +150,7 @@
     }
 
     .menu-title {
+      color: #FFFFFF;
       font-size: 1.7rem; // Adjust size as needed
       font-weight: bold;
     }

@@ -91,9 +91,8 @@ export default function Add() {
   const formatBulletPoints = (text) => {
     if (!text) return null;
     return text.split('\n')
-      .filter(item => item.trim())
       .map((item, index) => (
-        <li key={index}>{item.trim()}</li>
+        <li key={index}>{item.trim() || '\u00A0'}</li> // Use non-breaking space for empty lines
       ));
   };
 

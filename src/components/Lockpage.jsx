@@ -8,7 +8,7 @@ export default function Lockpage() {
   const [inputPin, setInputPin] = useState('');
   const [isUnlocked, setIsUnlocked] = useState(false);
 
-  const validPins = ["fivestar111"]; // Changed to text passwords
+  const validPins = ["957!32a3z1"]; // Changed to text passwords
 
   const handleUnlock = () => {
     if (validPins.includes(inputPin)) {

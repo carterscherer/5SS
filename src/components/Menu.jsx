@@ -45,9 +45,19 @@ const Menu = () => {
 
     const formatBulletPoints = (text) => {
         if (!text) return null;
-        return text.split('\n').filter(item => item.trim()).map((item, index) => (
-            <li key={index}>{item.trim()}</li>
-        ));
+        return text.split('\n')
+            .map((item, index) => {
+                const isUnavailable = item.trim().endsWith('- X');
+                const displayText = isUnavailable ? item.replace('- X', '').trim() : item.trim();
+                return (
+                    <li
+                        key={index}
+                        className={isUnavailable ? 'unavailable-item' : ''}
+                    >
+                        {displayText || '\u00A0'}
+                    </li>
+                );
+            });
     };
 
     return (
@@ -62,10 +72,12 @@ const Menu = () => {
                         <div key={item.id} className="menu-item">
                             <ImageCarousel images={item.images} title={item.title} status={item.status} />
                             <h3 className="menu-item-title">{item.title}</h3>
-                            <ul className="menu-item-list">
+                            <p className="pricing-label">Pricing</p>
+                            <ul className="menu-item-list pricing-list">
                                 {formatBulletPoints(item.pricing)}
                             </ul>
-                            <ul className="menu-item-list">
+                            <p className="strains-label">Variations</p>
+                            <ul className="menu-item-list strains-list">
                                 {formatBulletPoints(item.strains)}
                             </ul>
                         </div>
