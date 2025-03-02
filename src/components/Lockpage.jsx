@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import simpleLogo from '../assets/simpleLogo.png';
 import Backend from './Backend';
 import Backendheader from '../components/Backendheader'
 import "../scss/components/_lockpage.scss";
+import { db } from '../firebase/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default function Lockpage() {
   const [inputPin, setInputPin] = useState('');
   const [isUnlocked, setIsUnlocked] = useState(false);
+  const [gateCode, setGateCode] = useState(null);
 
-  const validPins = ["957!32a3z1"]; // Changed to text passwords
+  useEffect(() => {
+    const fetchGateCode = async () => {
+      try {
+        const infoCollection = collection(db, 'info');
+        const snapshot = await getDocs(infoCollection);
+        if (!snapshot.empty) {
+          const infoDoc = snapshot.docs[0].data();
+          setGateCode(infoDoc.gateCode);
+        }
+      } catch (error) {
+        console.error('Error fetching gate code:', error);
+      }
+    };
+
+    fetchGateCode();
+  }, []);
 
   const handleUnlock = () => {
-    if (validPins.includes(inputPin)) {
+    if (gateCode && inputPin === gateCode) {
       setIsUnlocked(true);
     } else {
       alert("Incorrect PIN, please try again.");
