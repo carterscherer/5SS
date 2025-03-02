@@ -39,7 +39,7 @@
 
     .bulletin-title-container {
         margin: 0.2rem 0.2rem 3rem 0rem;
-        border-radius: 0.5rem;
+        border-radius: 1.5rem;
         border: 0.2rem solid $bubblePink;
         background: radial-gradient(circle, #6312eeb0, $bubblePink);
         display: flex;
@@ -90,7 +90,7 @@
         line-height: 1.6;
         background-color: #f9f9f91a;
         border: 0.1rem solid $bubblePink;
-        border-radius: 8px;
+        border-radius: 1.5rem;
         padding: 2rem;
 
         h3 {

@@ -33,10 +33,14 @@ export default function Lockpage() {
           </div>
           <p className="prompt">Enter Password:</p>
           <input
-            type="password"
+            type="text"
             value={inputPin}
             onChange={(e) => setInputPin(e.target.value)}
             onKeyDown={handleKeyDown}
+            inputMode="text"
+            autoComplete="current-pin"
+            name="gate-pin"
+            id="gate-pin"
           />
           <button onClick={handleUnlock}>Unlock</button>
         </div>

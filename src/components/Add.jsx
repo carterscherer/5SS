@@ -91,9 +91,18 @@ export default function Add() {
   const formatBulletPoints = (text) => {
     if (!text) return null;
     return text.split('\n')
-      .map((item, index) => (
-        <li key={index}>{item.trim() || '\u00A0'}</li> // Use non-breaking space for empty lines
-      ));
+      .map((item, index) => {
+        const isUnavailable = item.trim().endsWith('- X');
+        const displayText = isUnavailable ? item.replace('- X', '').trim() : item.trim();
+        return (
+          <li
+            key={index}
+            className={isUnavailable ? 'unavailable-item' : ''}
+          >
+            {displayText || '\u00A0'}
+          </li>
+        );
+      });
   };
 
   const statusOptions = [

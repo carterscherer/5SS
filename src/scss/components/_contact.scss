@@ -28,7 +28,7 @@
 
     .contact-title-container {
         margin: 0.2rem 0.2rem 3rem 0rem;
-        border-radius: 0.5rem;
+        border-radius: 1.5rem;
         border: 0.2rem solid $bubblePink;
         background: radial-gradient(circle, #6312eeb0, $bubblePink);
         display: flex;
@@ -65,7 +65,7 @@
     .contact-item {
         background-color: #f9f9f91a;
         padding: 2rem;
-        border-radius: 8px;
+        border-radius: 1.5rem;
         border: 0.1rem solid $bubblePink;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: flex;

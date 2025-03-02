@@ -87,30 +87,28 @@ const Backend = () => {
         <div className="tab-content">
           <h2>MEMBER APPROVALS</h2>
           {sortedMemberList.map((member) => (
-            <div key={member.id} className="member-item">
-              <h3 style={{ color: member.isApproved ? "green" : "red" }}>
-                <span className="member-name">{member.displayName}</span>
-                <span className="member-email"> - {member.email}</span>
-              </h3>
-              <div className="actions">
-                <div
-                  className="approval-checkbox"
-                  onClick={() => toggleApproval(member.id, member.isApproved)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {member.isApproved ? (
-                    <IoMdCheckmarkCircle size={24} color="green" />
-                  ) : (
-                    <LiaHandMiddleFingerSolid size={24} color="gray" />
-                  )}
-                </div>
-                <div
-                  className="delete-button"
-                  onClick={() => deleteMember(member.id)}
-                  style={{ cursor: "pointer", marginTop: "-1rem" }}
-                >
-                  <FaTrashAlt className="trash-icon" size={14} color="red" />
-                </div>
+            <div key={member.id} className={`member-item ${member.isApproved ? 'approved' : ''}`}>
+              <div className="member-info">
+                <div className="member-name">{member.displayName}</div>
+                <div className="member-email">{member.email}</div>
+              </div>
+              <div
+                className="approval-checkbox"
+                onClick={() => toggleApproval(member.id, member.isApproved)}
+                style={{ cursor: "pointer" }}
+              >
+                {member.isApproved ? (
+                  <IoMdCheckmarkCircle size={24} color="green" />
+                ) : (
+                  <LiaHandMiddleFingerSolid size={24} color="gray" />
+                )}
+              </div>
+              <div
+                className="delete-button"
+                onClick={() => deleteMember(member.id)}
+                style={{ cursor: "pointer" }}
+              >
+                <FaTrashAlt className="trash-icon" size={14} color="red" />
               </div>
             </div>
           ))}

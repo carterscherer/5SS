@@ -117,8 +117,8 @@
   }
 
   .menu-item {
-    background-color: #000000;
-    border-radius: 10px;
+    background-color: #0000005c;
+    border-radius: 1.5rem;
     padding: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s, box-shadow 0.3s;
@@ -127,6 +127,7 @@
     height: fit-content;
     min-height: 200px;
     overflow: hidden;
+
 
     &:hover {
       transform: translateY(-5px);

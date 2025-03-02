@@ -1,4 +1,3 @@
-
 @import "../variables"; //$bubblePink $darkBackground 
 
 
@@ -7,7 +6,7 @@
   margin: 0 auto;
   padding: 20px 40px;
   background-color: $darkBackground;
-  border-radius: 8px;
+  border-radius: 1.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
   font-family: Arial, sans-serif;
@@ -29,7 +28,7 @@
       background-color: transparent;
       border: 0.1rem solid $bubblePink;
       color: $bubblePink;
-      border-radius: 6px;
+      border-radius: 1.5rem;
       cursor: pointer;
       font-size: 1rem;
 
@@ -53,27 +52,49 @@
 
     .member-item {
       display: flex;
-      align-items: center;
-      /* Align items horizontally */
-      justify-content: space-between;
-      /* Push the checkbox to the right */
+      flex-direction: column;
       margin-bottom: 1rem;
-      padding: 0.9rem;
+      padding: 1.9rem;
+      border-radius: 1.5rem;
+      background-color: #ffffff0e;
+      position: relative;
+      min-height: 120px;
 
-      h3 {
-        color: #fff;
+      &:not(.approved) {
+        background-color: #00000092;
+      }
+
+      .member-info {
         flex: 1;
-        /* Take available space */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .member-name {
+        font-size: 1.6rem;
+        color: #fff;
+        text-align: center;
+        margin: 0rem;
+      }
+
+      .member-email {
+        font-size: 0.9rem;
+        color: #ccc;
+        text-align: center;
+        margin-top: auto;
       }
 
       .approval-checkbox {
-        display: flex;
-        align-items: center;
-        padding: 0rem 0rem 0rem 2rem;
+        position: absolute;
+        bottom: 1rem;
+        left: -1rem;
       }
 
-      .approval-checkbox:hover {
-        opacity: 0.7;
+      .delete-button {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
       }
     }
 
@@ -135,7 +156,7 @@
     flex-direction: column;
     gap: 2rem;
     padding: 20px;
-    background: #1a1a1a;
+    background: #00000000;
     border-radius: 12px;
     border: 0px solid $bubblePink;
     margin: 1rem 0;
@@ -200,7 +221,7 @@
 
             &:focus {
               outline: none;
-              border-color: #fc68fa;
+              border-color: #c5c4c5;
               box-shadow: 0 0 8px rgba(235, 44, 232, 0.3);
             }
           }
@@ -265,6 +286,8 @@
       border-radius: 12px;
       border: 0px solid $bubblePink ;
       margin-bottom: 2rem;
+      box-shadow: 0 0 15px rgba(235, 44, 232, 0.2);
+
 
       h3 {
         color: $bubblePink ;
@@ -341,7 +364,9 @@
       padding: 1.5rem;
       background: $backMenu;
       border-radius: 12px;
-      border: 0px solid $bubblePink ;
+      border: 0px solid $bubblePink;
+      box-shadow: 0 0 15px rgba(235, 44, 232, 0.2);
+
 
       h3 {
         color: $bubblePink ;
