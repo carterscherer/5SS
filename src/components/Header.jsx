@@ -6,6 +6,7 @@ import "../scss/components/_header.scss";
 import { BsFillPersonBadgeFill, BsBoxArrowRight, BsTrash, BsKey, BsEnvelope } from "react-icons/bs";
 import { ImMenu } from "react-icons/im";
 import Modal from 'react-modal';
+import Landscape from "../assets/landscape.png";
 
 const Header = () => {
     const { currentUser, userLoggedIn, isApproved } = useAuth();
@@ -86,7 +87,6 @@ const Header = () => {
                     <ImMenu />
                 </button>
             )}
-
             {/* Desktop Navigation */}
             {isApproved && (
                 <div className="desktop-nav">
@@ -120,13 +120,13 @@ const Header = () => {
                             <BsKey className="menu-icon" />
                             <span>Reset Password</span>
                         </button>
-                        <button
+                        {/* <button
                             className="menu-item"
                             onClick={() => setIsEmailModalOpen(true)}
                         >
                             <BsEnvelope className="menu-icon" />
                             <span>Update Email</span>
-                        </button>
+                        </button> */}
                         <button
                             className="menu-item"
                             onClick={() => setIsDeleteModalOpen(true)}
@@ -238,7 +238,30 @@ const Header = () => {
                         <Link to="/bulletin" className="nav-link" onClick={toggleMenu}>Bulletin</Link>
                         <Link to="/contact" className="nav-link" onClick={toggleMenu}>Contact</Link>
                     </div>
+                    <img 
+                src={Landscape} 
+                alt="Landscape" 
+                className="landscape-image" 
+                style={{ 
+                    opacity: 0.1, 
+                    padding: 0,
+                    width: '100%',
+                    height: '17%',
+                    objectFit: 'cover',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    zIndex: 0,
+                }}
+            />
                     <div className="mobile-actions">
+                        <button
+                            className="mobile-action-item"
+                            onClick={() => doSignOut().then(() => navigate('/login'))}
+                        >
+                            <BsBoxArrowRight className="menu-icon" />
+                            <span>Logout</span>
+                        </button>
                         <button
                             className="mobile-action-item"
                             onClick={() => {
@@ -249,7 +272,7 @@ const Header = () => {
                             <BsKey className="mobile-action-icon" />
                             <span>Reset Password</span>
                         </button>
-                        <button
+                        {/* <button
                             className="mobile-action-item"
                             onClick={() => {
                                 toggleMenu();
@@ -258,7 +281,7 @@ const Header = () => {
                         >
                             <BsEnvelope className="mobile-action-icon" />
                             <span>Update Email</span>
-                        </button>
+                        </button> */}
                         <button
                             className="mobile-action-item"
                             onClick={() => {
@@ -272,6 +295,7 @@ const Header = () => {
                     </div>
                 </div>
             )}
+            
         </nav>
     );
 };

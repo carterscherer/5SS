@@ -63,8 +63,8 @@ const Menu = () => {
     return (
         <div className="menu">
             <div className="menu-title-container">
-                <h1 className="menu-title">MENU</h1>
                 <img src={logo} alt="Logo" className="logo" />
+                <h1 className="menu-title">MENU</h1>
             </div>
             <div className="menu-grid">
                 {menuItems.length > 0 ? (
@@ -76,7 +76,7 @@ const Menu = () => {
                             <ul className="menu-item-list pricing-list">
                                 {formatBulletPoints(item.pricing)}
                             </ul>
-                            <p className="strains-label">Variations</p>
+                            <p className="strains-label">Strains</p>
                             <ul className="menu-item-list strains-list">
                                 {formatBulletPoints(item.strains)}
                             </ul>

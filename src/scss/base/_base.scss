@@ -3,9 +3,10 @@
 @import url("https://use.typekit.net/iur8wnr.css");
 @import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Geologica:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root {
+$bubblePink: #eb2ce8;
 
-    --pinko: #eb2ce8;
+:root {
+    --bubblePink: #eb2ce8;
     --retisGreen: #8BD450;
     --retisBlue: #1C1A30;
     --retisDark: #1E1E1E;
@@ -25,15 +26,15 @@
 
 }
 
-
 * {
+
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-  
- 
+
+
 
 
 .app-container {

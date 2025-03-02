@@ -1,12 +1,13 @@
 import React from 'react';
 import { SiSignal } from 'react-icons/si';
 import "../scss/components/_contact.scss";
-
+import logo from "../assets/logo.png";
 const Contact = () => {
     return (
         <div className="contact">
             <div className="contact-title-container">
-                <h1 className="contact-title">Contact Us</h1>
+                <img src={logo} alt="Logo" className="logo" />
+                <h1 className="contact-title">CONTACT</h1>
             </div>
 
             <div className="contact-grid">

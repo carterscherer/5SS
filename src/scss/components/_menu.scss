@@ -1,14 +1,19 @@
+@import "../variables"; //$bubblePink $darkBackground
+
+
 html {
-  background-color: #000000;
+  background-color: $darkBackground;
 }
 
 .menu {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-align: center;
-  padding: 20px;
-  background: #000000;
+  padding: 10px;
+  background: $darkBackground;
   position: relative;
   overflow-y: hidden;
+  -webkit-tap-highlight-color: transparent; // Add this line
+
 
 
   &::before {
@@ -17,7 +22,7 @@ html {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 30vh;
+    height: 36vh;
     background: repeating-linear-gradient(43deg,
         #1a1a1a,
         #1a1a1a 10px,
@@ -38,25 +43,26 @@ html {
   }
 
   .logo {
-    max-width: 200px;
-    margin-bottom: 20px;
+    max-width: 180px;
+    margin: 0;
   }
 
   .menu-title-container {
     margin: 0.2rem 0.2rem 3rem 0rem;
-    border-radius: 0.5rem;
-    border: 0.3rem solid #eb2ce8;
-    background: radial-gradient(circle, #6312eeb0, #eb2ce8);
+    border-radius: 1.5rem;
+    border: 0.2rem solid $bubblePink;
+    background: radial-gradient(circle, #6312eeb0, $bubblePink);
     display: flex;
-    align-items: left;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    padding: 0rem 0rem 0rem 0rem;
   }
 
   .menu-title {
-
-    font-size: 3rem;
-    margin: 0.8rem 0rem 0rem 1.7rem;
-    color: #eb2ce8;
+    font-size: 5.7rem;
+    margin: 0.5rem 0 0 0;
+    color: $bubblePink;
     font-weight: 900;
   }
 
@@ -86,7 +92,7 @@ html {
         top: 10px;
         right: 10px;
         font-size: 24px;
-        color: #eb2ce8;
+        color: $bubblePink;
         background: rgba(0, 0, 0, 0.7);
         border-radius: 50%;
         padding: 4px;
@@ -169,12 +175,17 @@ html {
     height: auto;
   }
 
+  @media (max-width: 768px) {
+    .menu-item {
+      padding-top: 1.9rem !important;
+    }
+  }
 
   .menu-item {
-    background-color: #f9f9f91a;
+    background-color: #00000083;
     padding: 15px;
-    border-radius: 8px;
-    border: 0.1rem solid #eb2ce8;
+    border-radius: 1.5rem;
+    border: 0.1rem solid $bubblePink;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
     display: flex;
@@ -183,17 +194,25 @@ html {
     min-height: 200px;
     width: 100%;
     margin: 0;
+    -webkit-tap-highlight-color: transparent; // Add this line
+
+    @media (max-width: 768px) {
+      &:active {
+        background-color: #00000083; // Keep the same color
+      }
+    }
 
     .menu-item-image {
       width: 100%;
       height: auto;
-      border-radius: 8px;
+
+      border-radius: 1rem;
       object-fit: cover;
     }
 
     .menu-item-title {
       font-size: 1.2rem;
-      color: #eb2ce8;
+      color: $bubblePink;
       margin: 10px 0;
       white-space: normal;
       word-wrap: break-word;
@@ -236,9 +255,9 @@ html {
   .approval-message {
     position: block;
     z-index: 0;
-    background: radial-gradient(circle, #6312eeb0, #eb2ce8);
+    background: radial-gradient(circle, #6312eeb0, $bubblePink);
     border-radius: 8px;
-    border: 0.1rem solid #eb2ce8;
+    border: 0.1rem solid $bubblePink;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
     height: 23vh;
@@ -260,7 +279,7 @@ html {
       margin: 2rem;
       background-color: #000000;
       border-radius: 8px;
-      border: 0.1rem solid #eb2ce8;
+      border: 0.1rem solid $bubblePink;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       font-size: 2rem;
       padding: 2rem;
@@ -273,13 +292,38 @@ html {
       color: #ffffff7f;
     }
   }
+
+  @media (max-width: 768px) {
+    .menu-title-container {
+      height: 40vh;
+
+      .menu-title {
+        font-size: 3.5rem;
+        margin-bottom: 5rem;
+      }
+
+      .logo {
+        margin-top: 3rem;
+        max-width: 250px;
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 45vh;
+    }
+  }
 }
 
 .status-select {
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  background-color: #2c2c2c;
+  background-color: $backMenu;
   color: white;
   width: 100%;
   margin-bottom: 8px;
@@ -303,7 +347,7 @@ html {
       top: 10px;
       right: 10px;
       font-size: 24px;
-      color: #eb2ce8;
+      color: $bubblePink;
       background: rgba(0, 0, 0, 0.7);
       border-radius: 50%;
       padding: 4px;
@@ -444,4 +488,18 @@ html {
 
 .strains-label {
   text-align: center;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #00000083;
+  }
+
+  50% {
+    background-color: #b524c039; // Use your specific color here
+  }
+
+  100% {
+    background-color: #00000083;
+  }
 }

@@ -92,19 +92,8 @@ const Bulletin = () => {
                 <p>{bulletinContent.updates}</p>
             </section>
 
-            <section className="flyers-section">
-                <h2>REFERRAL REWARDS</h2>
-                <div className="flyers-container">
-                    <div className="swiper-container">
-                        {flyers.length > 0 && (
-                            <img src={flyers[0].image} alt="Flyer" className="flyer-image" />
-                        )}
-                    </div>
-                </div>
-            </section>
-
             <section className="testimonials-section">
-                <h2>USER TESTIMONIALS</h2>
+                <h2>TESTIMONIALS</h2>
                 <div className="testimonials-container">
                     {testimonials.length > 0 ? (
                         testimonials.map(testimonial => (
@@ -123,6 +112,18 @@ const Bulletin = () => {
                     )}
                 </div>
             </section>
+            
+            <section className="flyers-section">
+                <h2>REFERRAL REWARDS</h2>
+                <div className="flyers-container">
+                    <div className="swiper-container">
+                        {flyers.length > 0 && (
+                            <img src={flyers[0].image} alt="Flyer" className="flyer-image" />
+                        )}
+                    </div>
+                </div>
+            </section>
+
 
             {/* <section className="disclaimer">
                 <p>{bulletinContent.disclaimer}</p>

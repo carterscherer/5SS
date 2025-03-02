@@ -196,46 +196,6 @@ const BulletinEditor = () => {
                     </div>
                 ))}
             </div>
-            <div className="flyers-editor">
-                <h3>REFERRAL REWARDS</h3>
-                {flyers.length > 0 && (
-                    <div className="bulletin-item">
-                        <div className="bulletin-image-container">
-                            <img
-                                src={processImageUrl(flyers[0].image)}
-                                alt="Flyer"
-                                className="bulletin-image"
-                                width="150"
-                                height="150"
-                                loading="lazy"
-                            />
-                        </div>
-                        {editingId === flyers[0].id ? (
-                            <div className="edit-controls">
-                                <input
-                                    type="text"
-                                    value={newImageUrl}
-                                    onChange={(e) => setNewImageUrl(e.target.value)}
-                                    placeholder="Enter new image URL"
-                                />
-                                <div className="button-group">
-                                    <button onClick={() => handleUpdate(flyers[0].id)}>Save</button>
-                                    <button onClick={() => {
-                                        setEditingId(null);
-                                        setNewImageUrl("");
-                                    }}>Cancel</button>
-                                </div>
-                            </div>
-                        ) : (
-                            <button onClick={() => {
-                                setEditingId(flyers[0].id);
-                                setNewImageUrl(flyers[0].image);
-                            }}>Edit Image</button>
-                        )}
-                    </div>
-                )}
-            </div>
-
             <div className="testimonials-editor">
                 <h3>TESTIMONIALS</h3>
                 <div className="testimonials-grid">
@@ -305,6 +265,46 @@ const BulletinEditor = () => {
                     </div>
                 </div>
             </div>
+            <div className="flyers-editor">
+                <h3>REFERRAL REWARDS</h3>
+                {flyers.length > 0 && (
+                    <div className="bulletin-item">
+                        <div className="bulletin-image-container">
+                            <img
+                                src={processImageUrl(flyers[0].image)}
+                                alt="Flyer"
+                                className="bulletin-image"
+                                width="150"
+                                height="150"
+                                loading="lazy"
+                            />
+                        </div>
+                        {editingId === flyers[0].id ? (
+                            <div className="edit-controls">
+                                <input
+                                    type="text"
+                                    value={newImageUrl}
+                                    onChange={(e) => setNewImageUrl(e.target.value)}
+                                    placeholder="Enter new image URL"
+                                />
+                                <div className="button-group">
+                                    <button onClick={() => handleUpdate(flyers[0].id)}>Save</button>
+                                    <button onClick={() => {
+                                        setEditingId(null);
+                                        setNewImageUrl("");
+                                    }}>Cancel</button>
+                                </div>
+                            </div>
+                        ) : (
+                            <button onClick={() => {
+                                setEditingId(flyers[0].id);
+                                setNewImageUrl(flyers[0].image);
+                            }}>Edit Image</button>
+                        )}
+                    </div>
+                )}
+            </div>
+
         </div>
     );
 };

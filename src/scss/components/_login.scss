@@ -1,3 +1,6 @@
+@import "../variables"; //$bubblePink $darkBackground //957!32a3z1 //eb2ce8
+
+
 // Define the gradient background animation for the login page
 @keyframes gradientAnimation {
     0% {
@@ -27,7 +30,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: radial-gradient(circle, #ff5fff, #eb2ce8, #121456, #1d8953);
+    background: radial-gradient(circle, #ff5fff, $bubblePink, #121456, #1d8953);
     background-size: 600% 600%;
     animation: gradientAnimation 20s ease infinite;
     font-family: Arial, sans-serif;
@@ -101,7 +104,7 @@
     }
 
     .error-message {
-        color: #eb2ce8;
+        color: $bubblePink;
         font-size: 0.875rem;
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
@@ -110,7 +113,7 @@
     .submit-button {
         
         padding: 1.2rem;
-        background-color: #eb2ce8;
+        background-color: $bubblePink;
         color: white;
         font-weight: bold;
         border: none;
@@ -119,7 +122,7 @@
         transition: background 0.3s;
 
         &:hover {
-            background-color: #eb6ee9;
+            background-color: $bubblePink;
         }
 
         &:disabled {
@@ -203,8 +206,8 @@
     transition: color 0.3s, text-decoration-color 0.3s;
 
     &:hover {
-        color: #eb2ce8;
-        text-decoration-color: #eb2ce8;
+        color: $bubblePink;
+        text-decoration-color: $bubblePink;
     }
 
     &:focus {

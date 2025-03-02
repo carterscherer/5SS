@@ -1,0 +1,16 @@
+$bubblePink: #BFBCFC; // #eb2ce8 pink
+$bubbleBlue: #7c85eb; // #7c85eb blue
+$darkBackground: #221831;
+$backMenu: #1e1e27;
+
+// #7c85eb blue
+// #221831 dark blue background
+// #eb2ce8 pink
+
+
+:root {
+    --bubblePink: #{$bubblePink};
+    --bubbleBlue: #{$bubbleBlue};
+    --darkBackground: #{$darkBackground};
+    --backMenu: #{$backMenu};
+}

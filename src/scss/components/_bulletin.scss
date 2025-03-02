@@ -1,8 +1,12 @@
+
+@import "../variables"; //$bubblePink $darkBackground
+
+
 .bulletin {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
     padding: 10px;
-    background: #000000;
+    background: $darkBackground;
     position: relative;
     overflow-y: hidden;
     color: white;
@@ -13,7 +17,7 @@
         top: 0;
         left: 0;
         width: 100vw;
-        height: 30vh;
+        height: 35vh;
         background: repeating-linear-gradient(43deg,
                 #1a1a1a,
                 #1a1a1a 10px,
@@ -36,8 +40,8 @@
     .bulletin-title-container {
         margin: 0.2rem 0.2rem 3rem 0rem;
         border-radius: 0.5rem;
-        border: 0.2rem solid #eb2ce8;
-        background: radial-gradient(circle, #6312eeb0, #eb2ce8);
+        border: 0.2rem solid $bubblePink;
+        background: radial-gradient(circle, #6312eeb0, $bubblePink);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -45,15 +49,37 @@
         padding: 0rem 0rem 0rem 0rem;
 
         h1 {
-            font-size: 3rem;
+            font-size: 5.7rem;
             margin: 0.5rem 0 0 0;
-            color: #eb2ce8;
+            color: $bubblePink;
             font-weight: 900;
         }
 
         .logo {
             max-width: 180px;
             margin: 0;
+        }
+    }
+    @media (max-width: 768px) {
+        .bulletin-title-container {
+            height: 40vh;
+
+            h1 {
+                font-size: 3.5rem;
+                margin-bottom: 5rem;
+            }
+            .logo {
+                margin-top: 3rem;
+                max-width: 250px;
+            }
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 45vh;
         }
     }
 
@@ -63,12 +89,12 @@
         margin: 0 auto 3rem;
         line-height: 1.6;
         background-color: #f9f9f91a;
-        border: 0.1rem solid #eb2ce8;
+        border: 0.1rem solid $bubblePink;
         border-radius: 8px;
         padding: 2rem;
 
         h3 {
-            color: #eb2ce8;
+            color: $bubblePink;
             margin-bottom: 1rem;
         }
 
@@ -81,7 +107,7 @@
         h2 {
             text-align: center;
             margin-bottom: 2rem;
-            color: #eb2ce8;
+            color: $bubblePink;
         }
 
         .flyers-container {
@@ -92,7 +118,7 @@
             margin-bottom: 4rem;
             padding: 0rem;
             background-color: #f9f9f900;
-            border: 0rem solid #eb2ce8;
+            border: 0rem solid $bubblePink;
             border-radius: 8px;
         }
 
@@ -102,19 +128,21 @@
         }
 
         .flyer-image {
-            width: 100%;
+            max-width: 100%;
             height: auto;
-            border-radius: 4px;
             object-fit: contain;
             max-height: 60vh;
+            border-radius: 9px !important;
+            animation: fadeIn 3s ease-in-out;
         }
+
 
         .updates-notice {
             width: 100%;
             text-align: left;
             font-weight: 500;
             background-color: #f9f9f91a;
-            border: 0.1rem solid #eb2ce8;
+            border: 0.1rem solid $bubblePink;
             border-radius: 8px;
             padding: 1.5rem;
 
@@ -125,7 +153,7 @@
 
             h3 {
                 font-size: 1.5rem;
-                color: #eb2ce8;
+                color: $bubblePink;
                 margin-bottom: 1rem;
             }
 
@@ -145,7 +173,7 @@
         max-width: 800px;
         margin: 3rem auto 0;
         background-color: #f9f9f91a;
-        border: 0.1rem solid #eb2ce8;
+        border: 0.1rem solid $bubblePink;
         border-radius: 8px;
         padding: 1.5rem;
     }
@@ -164,11 +192,11 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-    color: #eb2ce8;
+    color: $bubblePink;
 }
 
 .swiper-pagination-bullet {
-    background: #eb2ce8;
+    background: $bubblePink;
 }
 
 .carousel-container {
@@ -213,7 +241,7 @@
 
 @media (max-width: 768px) {
     .carousel-container {
-        padding: 0 1rem;
+        padding: 0 1rem;        
 
         .carousel-button {
             &.left {
@@ -236,7 +264,7 @@
     padding: 0 1rem;
 
     h2 {
-        color: #eb2ce8;
+        color: $bubblePink;
         font-size: 2rem;
         margin-bottom: 2rem;
         font-weight: bold;
@@ -262,7 +290,7 @@
             font-size: 1.2rem;
             padding: 2rem;
             background-color: #f9f9f91a;
-            border: 1px solid #eb2ce8;
+            border: 1px solid $bubblePink;
             border-radius: 8px;
         }
     }
