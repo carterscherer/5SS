@@ -90,7 +90,7 @@ const Header = () => {
             {/* Desktop Navigation */}
             {isApproved && (
                 <div className="desktop-nav">
-                    <Link to="/home" className="nav-link">Menu</Link>
+                    <Link to="/menu" className="nav-link">Menu</Link>
                     <Link to="/bulletin" className="nav-link">Bulletin</Link>
                     <Link to="/contact" className="nav-link">Contact</Link>
                 </div>
@@ -234,7 +234,7 @@ const Header = () => {
                         <span className="header-user">{getDisplayName()}</span>
                     </div>
                     <div className="mobile-nav-links">
-                        <Link to="/home" className="nav-link" onClick={toggleMenu}>Menu</Link>
+                        <Link to="/menu" className="nav-link" onClick={toggleMenu}>Menu</Link>
                         <Link to="/bulletin" className="nav-link" onClick={toggleMenu}>Bulletin</Link>
                         <Link to="/contact" className="nav-link" onClick={toggleMenu}>Contact</Link>
                     </div>

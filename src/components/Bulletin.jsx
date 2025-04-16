@@ -96,18 +96,11 @@ const Bulletin = () => {
                 <h2>TESTIMONIALS</h2>
                 <div className="testimonials-container">
                     {testimonials.length > 0 ? (
-                        testimonials.map(testimonial => (
-                            <img
-                                key={testimonial.id}
-                                src={testimonial.image}
-                                alt="User testimonial"
-                                className="testimonial-image"
-                            />
-                        ))
+                        <ImageCarousel images={testimonials.map(t => t.image)} />
                     ) : (
                         <div>
-                        <p className="coming-soon">Signal FiveStar to show up on the bulletin</p>
-                        <p></p>
+                            <p className="coming-soon">Signal FiveStar to show up on the bulletin</p>
+                            <p></p>
                         </div>
                     )}
                 </div>
