@@ -72,11 +72,12 @@ const Menu = () => {
                         <div key={item.id} className="menu-item">
                             <ImageCarousel images={item.images} title={item.title} status={item.status} />
                             <h3 className="menu-item-title">{item.title}</h3>
-                            <p className="pricing-label">Pricing</p>
+                            {/* <p className="pricing-label">Pricing</p> */}
+                            {item.pricing && <p className="pricing-label">Pricing</p>}
                             <ul className="menu-item-list pricing-list">
                                 {formatBulletPoints(item.pricing)}
                             </ul>
-                            <p className="strains-label">Strains</p>
+                            {item.strains && <p className="strains-label">Strains</p>}
                             <ul className="menu-item-list strains-list">
                                 {formatBulletPoints(item.strains)}
                             </ul>
