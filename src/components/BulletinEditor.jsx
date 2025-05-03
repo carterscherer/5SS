@@ -3,6 +3,8 @@ import { db } from "../firebase/firebase";
 import { collection, getDocs, doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import "../scss/components/_backend.scss";
 import "../scss/components/_bulletin.scss";
+import { BiSolidImage } from "react-icons/bi";
+
 
 const BulletinEditor = () => {
     const [flyers, setFlyers] = useState([]);
@@ -202,17 +204,19 @@ const BulletinEditor = () => {
                     {testimonials.map(testimonial => (
                         <div key={testimonial.id} className="testimonial-item">
                             <div className="testimonial-image-container">
-                                <img
+                                {/* <img
                                     src={processImageUrl(testimonial.image)}
                                     alt="Testimonial"
                                     className="bulletin-image"
                                     width="150"
                                     height="150"
                                     loading="lazy"
-                                />
+                                /> */}
                             </div>
+                            <BiSolidImage style={{ color: "#6EC1E4", fontSize: "2rem" }} />
                             {editingId === testimonial.id ? (
                                 <div className="edit-controls">
+                                    
                                     <input
                                         type="text"
                                         value={newImageUrl}
