@@ -11,7 +11,7 @@ const Contact = () => {
             </div>
 
             <div className="contact-grid">
-                <a href="https://signal.me/#eu/byzDyp3V4GInBy4XC8dVgB8ZPusn18jhXfUGVcQ4xbdYqTTAj-5D9K5Y7LxPk3JQ" target="_blank" rel="noopener noreferrer" className="contact-item">
+                <a href="https://signal.me/#eu/-jVh-fCCpMFPiBX5EH2fqM9yMXUTXbesrLG_IhlpveHcqH3LighL2qypjdoiL4O_" target="_blank" rel="noopener noreferrer" className="contact-item">
                     <SiSignal className="contact-icon" />
                     <span className="contact-text">Signal</span>
                 </a>
